@@ -13,11 +13,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import org.apache.log4j.Logger;
+
 @Controller
 public class SysUserController {
 
 	@Autowired
 	private SysUserService sysUserService;
+	
+	private static final Logger logger = Logger.getLogger(SysUserController.class);
 	
 	@RequestMapping("/index")
 	public String listSysUsers(Map<String, Object> map) {
