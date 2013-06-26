@@ -15,6 +15,11 @@ public class SysUserServiceImpl implements SysUserService {
 	private SysUserDAO sysUserDAO;
 
 	@Transactional
+	public List<SysUser> validateLogin(SysUser sysUser) {
+		return sysUserDAO.validateLogin(sysUser);
+	}
+
+	@Transactional
 	public void addSysUser(SysUser sysUser) {
 		sysUserDAO.addSysUser(sysUser);
 	}

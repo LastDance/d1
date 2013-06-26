@@ -14,6 +14,13 @@ public class SysUserDAOImpl implements SysUserDAO {
 	@Autowired
 	private SessionFactory sessionFactory;
 
+	@SuppressWarnings("unchecked")
+	public List<SysUser> validateLogin(SysUser sysUser){
+		return sessionFactory.getCurrentSession().createQuery(
+				"from SysUser where username=:username and password=:password")
+				.setString("username", sysUser.getUsername()).setString("password",sysUser.getPassword()).list();
+	}
+	
 	public void addSysUser(SysUser sysUser) {
 		sessionFactory.getCurrentSession().save(sysUser);
 	}
