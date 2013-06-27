@@ -3,19 +3,22 @@ package com.dms.test.controller;
 import java.util.List;
 import java.util.Map;
 
-import com.dms.test.model.SysUser;
-import com.dms.test.service.SysUserService;
-import com.dms.common.util.Encryption;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import org.apache.log4j.Logger;
+import com.dms.common.util.Encryption;
+import com.dms.test.model.SysUser;
+import com.dms.test.service.SysUserService;
+import com.dms.test.validator.LoginValidator;
 
 @Controller
 public class SysUserController {
@@ -32,15 +35,26 @@ public class SysUserController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/authentication", method = RequestMethod.POST)
-	public String authenticate(@ModelAttribute("sysUser") SysUser sysUser) {
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String authenticate(@ModelAttribute("sysUser") SysUser sysUser,
+			BindingResult result, HttpServletRequest request) {
+
+		LoginValidator loginValidator = new LoginValidator();
+		loginValidator.validate(sysUser, result);
+
 		sysUser.setPassword(Encryption.encrypt(sysUser.getPassword()));
 		List<SysUser> loginlist = sysUserService.validateLogin(sysUser);
-		if (loginlist.size() > 0) {
+
+		if (result.hasErrors()) {
+			return "login";
+		} else if(loginlist.isEmpty()){
+			result.addError(new ObjectError("AuthenticationFailed", "密码错误"));
+			return "login";
+		}else{
+			request.getSession().setAttribute("sysuser", sysUser);
 			return "redirect:/user";
-		} else {
-			return "redirect:/login";
 		}
+
 	}
 
 	@RequestMapping("/user")
