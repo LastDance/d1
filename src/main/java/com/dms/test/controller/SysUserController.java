@@ -1,5 +1,7 @@
 package com.dms.test.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +31,22 @@ public class SysUserController {
 	private static final Logger logger = Logger
 			.getLogger(SysUserController.class);
 
+	@RequestMapping("/welcome")
+	public String welcome(Map<String, Object> map) {
+		return "welcome";
+	}
+	
+	@RequestMapping("/logoff")
+	public String logoff(HttpServletRequest request) {
+		request.getSession().invalidate();
+		return "redirect:/login";
+	}
+	
+	@RequestMapping("/underwork")
+	public String underWork(Map<String, Object> map) {
+		return "underwork";
+	}
+	
 	@RequestMapping("/login")
 	public String login(Map<String, Object> map) {
 		map.put("sysUser", new SysUser());
@@ -47,12 +65,16 @@ public class SysUserController {
 
 		if (result.hasErrors()) {
 			return "login";
-		} else if(loginlist.isEmpty()){
+		} else if (loginlist.isEmpty()) {
 			result.addError(new ObjectError("AuthenticationFailed", "密码错误"));
 			return "login";
-		}else{
-			request.getSession().setAttribute("sysuser", sysUser);
-			return "redirect:/user";
+		} else {
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
+			
+			request.getSession().setAttribute("sysuser", sysUser.getUsername());
+			request.getSession().setAttribute("loginTimestamp", sdf.format(date));
+			return "redirect:/welcome";
 		}
 
 	}

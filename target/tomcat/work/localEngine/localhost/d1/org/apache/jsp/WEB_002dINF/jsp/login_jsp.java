@@ -304,25 +304,6 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\t</div>\r\n");
       out.write("\t<!-- /container -->\r\n");
       out.write("\r\n");
-      out.write("\t<!-- Le javascript\r\n");
-      out.write("    ================================================== -->\r\n");
-      out.write("\t<!-- Placed at the end of the document so the pages load faster -->\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/jquery.js\"></script>\r\n");
-      out.write("\t<script\r\n");
-      out.write("\t\tsrc=\"./Sign in · Twitter Bootstrap_files/bootstrap-transition.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-alert.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-modal.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-dropdown.js\"></script>\r\n");
-      out.write("\t<script\r\n");
-      out.write("\t\tsrc=\"./Sign in · Twitter Bootstrap_files/bootstrap-scrollspy.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-tab.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-tooltip.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-popover.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-button.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-collapse.js\"></script>\r\n");
-      out.write("\t<script src=\"./Sign in · Twitter Bootstrap_files/bootstrap-carousel.js\"></script>\r\n");
-      out.write("\t<script\r\n");
-      out.write("\t\tsrc=\"./Sign in · Twitter Bootstrap_files/bootstrap-typeahead.js\"></script>\r\n");
       out.write("</body>\r\n");
       out.write("</html>");
     } catch (Throwable t) {

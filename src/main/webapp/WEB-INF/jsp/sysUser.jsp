@@ -5,6 +5,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="currentPage" content="userManagement"/>
+<meta name="currentCategory" content="user"/>
+
     <title>Spring 3 MVC Series - System User Manager | DMS</title>
 </head>
 <body>

@@ -3,11 +3,16 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator"
 	prefix="decorator"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
 <head>
 <title></title>
+<decorator:usePage id="thePage" />
+<%
+	String pageName = thePage.getProperty("meta.currentPage");
+%>
+<%
+	String pageCategory = thePage.getProperty("meta.currentCategory");
+%>
 <!-- Bootstrap -->
 <link href="<c:url value='/css/bootstrap.css'/>" rel="stylesheet" />
 <style type="text/css">
@@ -33,6 +38,7 @@ body {
 <body>
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="<c:url value='/js/bootstrap.js'/>"></script>
+	<script src="<c:url value='/css/hover-dropdown.css'/>"></script>
 
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
@@ -42,50 +48,50 @@ body {
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand"
-					href="http://twitter.github.io/bootstrap/examples/fluid.html#">DMS</a>
+				<a class="brand" style="color:#FFF" href="<c:url value='/welcome'/>">DMS</a>
 				<div class="nav-collapse collapse">
 					<p class="navbar-text pull-right">
-						Logged in as <a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#"
-							class="navbar-link">Username</a>
+						<a href=""
+							class="navbar-link"><%=session.getAttribute("sysuser")%></a> <a
+							href="<c:url value='/logoff'/>" class="navbar-link">登出</a>
 					</p>
-					<ul class="nav">
-						<li class="active"><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#">Home</a></li>
-						<li><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#about">About</a></li>
-						<li><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#contact">Contact</a></li>
+					<%-- 				<ul class="nav">
+						<li <%if (pageCategory.equals("welcome")) {%> class="active" <%}%>><a
+							href="<c:url value='/welcome'/>">首页</a></li>
+						<li <%if (pageCategory.equals("user")) {%> class="active" <%}%>><a
+							href="<c:url value='/user'/>">用户</a></li>
 					</ul>
+ --%>
+					<ul class="nav">
+						<li class="dropdown <%if (pageCategory.equals("user")) {%>active<%}%>"><a href="#" class="dropdown-toggle"
+							data-toggle="dropdown" data-hover="dropdown" data-delay="1000"
+							data-close-others="false"> 用户管理<b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1" href="#">管理</a></li>
+								<li><a tabindex="-1" href="#">浏览</a></li>
+								<li><a tabindex="-1" href="#">增加</a></li>
+								<li><a tabindex="-1" href="#">删除</a></li>
+							</ul></li>
+					</ul>
+
+
 				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="container-fluid">
 		<div class="row-fluid">
-			<div class="span3">
+			<div class="span2">
 				<div class="well sidebar-nav">
 					<ul class="nav nav-list">
-						<li class="nav-header">Sidebar</li>
-						<li class="active"><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#">Link</a></li>
-						<li><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#">Link</a></li>
-						<li><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#">Link</a></li>
-						<li class="nav-header">Sidebar</li>
-						<li><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#">Link</a></li>
-						<li><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#">Link</a></li>
-						<li class="nav-header">Sidebar</li>
-						<li><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#">Link</a></li>
-						<li><a
-							href="http://twitter.github.io/bootstrap/examples/fluid.html#">Link</a></li>
-
+						<li class="nav-header">快捷访问</li>
+						<li <%if (pageName.equals("welcome")) {%> class="active" <%}%>><a
+							href="<c:url value='/welcome'/>">首页</a></li>
+						<li <%if (pageName.equals("userManagement")) {%> class="active"
+							<%}%>><a href="<c:url value='/user'/>">用户管理</a></li>
+						<li <%if (pageName.equals("underwork")) {%> class="active" <%}%>><a
+							href="<c:url value='/underwork'/>">研发中...</a></li>
 					</ul>
 				</div>
 				<!--/.well -->
