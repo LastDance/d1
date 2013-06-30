@@ -13,9 +13,9 @@ public class SystemInterceptor extends HandlerInterceptorAdapter {
 		String uri = request.getRequestURI();
 
 		if (uri.indexOf("login") == -1) {
-			Object user = request.getSession().getAttribute("sysuser");
+			Object user = request.getSession().getAttribute("user");
 			if (user == null) {
-				response.sendRedirect("login");
+				response.sendRedirect("/d1/login");
 				return false;
 			} else {
 				return true;

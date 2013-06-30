@@ -1,0 +1,44 @@
+TODO: change customer to entity
+
+User
+====================================================================
+user_id              int            auto_increament PK
+user_name            varchar(40)    user name
+user_passwd          varchar(40)    user password
+user_email           varchar(40)    user email
+user_telephone       varchar(40)    user telephone
+user_qq              int            user qq number
+
+Order Master
+=====================================================================
+ord_id	    		 int             auto_increament PK
+ord_nbr	 			 varchar(20) 	 order number			
+ord_cust_nbr 		 varchar(40)	 customer reference order number
+ord_customer         varchar(40)   	 customer
+ord_entered_date	 date            the day order was entered
+ord_entered_by		 varchar(40) 	 person who entered the order
+ord_required_date    date            the day order was required
+ord_reviewed_by      varchar(40)  	 person(s) who reviewed the order
+ord_reviewed_date    date            order reviewed date
+ord_status           varchar(20)   	 order status
+ord_comment          varchar(200)  	 order comment
+====================================================================
+
+Order Line
+====================================================================
+ordl_id              int             auto_increament PK
+ordl_ord_id          int 		     FK to Order Master Table
+ordl_nbr             int             order line number
+ordl_item            varchar(20) 	 order line item
+ordl_item_price      double          order line item price
+ordl_item_qty        double          order line item quantity
+ordl_status          varchar(20)     order line status
+ordl_required_date   date            order line required date
+ordl_reviewed_by     varchar(40) 	 order line reviewed by
+ordl_reviewed_date   date            order line reviewed date
+ordl_comment         varchar(200)	 order line commnet
+====================================================================
+
+Order Control
+====================================================================
+====================================================================

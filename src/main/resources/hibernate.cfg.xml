@@ -2,10 +2,12 @@
 <!DOCTYPE hibernate-configuration PUBLIC
     "-//Hibernate/Hibernate Configuration DTD//EN"
     "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
- 
+
 <hibernate-configuration>
-    <session-factory>
-        <mapping class="com.dms.test.model.SysUser" />
-    </session-factory>
-         
+	<session-factory>
+		<mapping class="com.dms.om.model.User" />
+		<mapping class="com.dms.om.model.Order" />
+		<mapping class="com.dms.om.model.OrderLine" />
+	</session-factory>
+
 </hibernate-configuration>

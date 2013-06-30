@@ -1,4 +1,4 @@
-package com.dms.test.controller;
+package com.dms.om.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,23 +13,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dms.common.util.Encryption;
-import com.dms.test.model.SysUser;
-import com.dms.test.service.SysUserService;
-import com.dms.test.validator.LoginValidator;
+import com.dms.om.model.User;
+import com.dms.om.service.IUserService;
+import com.dms.om.validator.LoginValidator;
 
 @Controller
-public class SysUserController {
+public class UserController {
 
 	@Autowired
-	private SysUserService sysUserService;
+	private IUserService userService;
 
 	private static final Logger logger = Logger
-			.getLogger(SysUserController.class);
+			.getLogger(UserController.class);
 
 	@RequestMapping("/welcome")
 	public String welcome(Map<String, Object> map) {
@@ -49,19 +48,19 @@ public class SysUserController {
 	
 	@RequestMapping("/login")
 	public String login(Map<String, Object> map) {
-		map.put("sysUser", new SysUser());
+		map.put("user", new User());
 		return "login";
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String authenticate(@ModelAttribute("sysUser") SysUser sysUser,
+	public String authenticate(@ModelAttribute("user") User user,
 			BindingResult result, HttpServletRequest request) {
 
 		LoginValidator loginValidator = new LoginValidator();
-		loginValidator.validate(sysUser, result);
+		loginValidator.validate(user, result);
 
-		sysUser.setPassword(Encryption.encrypt(sysUser.getPassword()));
-		List<SysUser> loginlist = sysUserService.validateLogin(sysUser);
+		user.setPassword(Encryption.encrypt(user.getPassword()));
+		List<User> loginlist = userService.validateLogin(user);
 
 		if (result.hasErrors()) {
 			return "login";
@@ -72,7 +71,8 @@ public class SysUserController {
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 			
-			request.getSession().setAttribute("sysuser", sysUser.getUsername());
+			logger.info(user.getUsername()+ " logged in at " + sdf.format(date));
+			request.getSession().setAttribute("user", user.getUsername());
 			request.getSession().setAttribute("loginTimestamp", sdf.format(date));
 			return "redirect:/welcome";
 		}
@@ -81,26 +81,24 @@ public class SysUserController {
 
 	@RequestMapping("/user")
 	public String listSysUsers(Map<String, Object> map) {
-		map.put("sysUser", new SysUser());
-		map.put("sysUserList", sysUserService.listSysUser());
-
-		return "sysUser";
+		map.put("user", new User());
+		return "user";
 	}
 
-	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String addSysUser(@ModelAttribute("sysUser") SysUser sysUser,
-			BindingResult result) {
-		sysUser.setPassword(Encryption.encrypt(sysUser.getPassword()));
-		sysUserService.addSysUser(sysUser);
-
-		return "redirect:/user";
-	}
-
-	@RequestMapping("/delete/{sysUserId}")
-	public String deleteSysUser(@PathVariable("sysUserId") Integer sysUserId) {
-		sysUserService.removeSysUser(sysUserId);
-
-		return "redirect:/user";
-	}
+//	@RequestMapping(value = "/add", method = RequestMethod.POST)
+//	public String addSysUser(@ModelAttribute("sysUser") User sysUser,
+//			BindingResult result) {
+//		sysUser.setPassword(Encryption.encrypt(sysUser.getPassword()));
+//		sysUserService.addSysUser(sysUser);
+//
+//		return "redirect:/user";
+//	}
+//
+//	@RequestMapping("/delete/{sysUserId}")
+//	public String deleteSysUser(@PathVariable("sysUserId") Integer sysUserId) {
+//		sysUserService.removeSysUser(sysUserId);
+//
+//		return "redirect:/user";
+//	}
 
 }

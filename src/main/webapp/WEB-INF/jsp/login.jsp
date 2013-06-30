@@ -55,7 +55,7 @@ body {
 </head>
 
 <body>
-	<spring:hasBindErrors htmlEscape="true" name="sysUser">
+	<spring:hasBindErrors htmlEscape="true" name="user">
 		<c:if test="${errors.errorCount gt 0}">
 
 			<div class="alert alert-error fade in" style="text-align: center">
@@ -70,7 +70,7 @@ body {
 	</spring:hasBindErrors>
 
 	<div class="container">
-		<form:form method="post" action="login" commandName="sysUser"
+		<form:form method="post" action="login" commandName="user"
 			class="form-signin">
 			<h2 class="form-signin-heading">请登录</h2>
 			<c:set var="label_username">

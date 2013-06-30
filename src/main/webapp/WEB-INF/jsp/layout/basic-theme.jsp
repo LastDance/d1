@@ -15,6 +15,7 @@
 %>
 <!-- Bootstrap -->
 <link href="<c:url value='/css/bootstrap.css'/>" rel="stylesheet" />
+<link href="<c:url value='/css/datepicker.css'/>" rel="stylesheet" />
 <style type="text/css">
 body {
 	padding-top: 60px;
@@ -38,7 +39,6 @@ body {
 <body>
 	<script src="http://code.jquery.com/jquery.js"></script>
 	<script src="<c:url value='/js/bootstrap.js'/>"></script>
-	<script src="<c:url value='/css/hover-dropdown.css'/>"></script>
 
 	<div class="navbar navbar-inverse navbar-fixed-top">
 		<div class="navbar-inner">
@@ -52,7 +52,7 @@ body {
 				<div class="nav-collapse collapse">
 					<p class="navbar-text pull-right">
 						<a href=""
-							class="navbar-link"><%=session.getAttribute("sysuser")%></a> <a
+							class="navbar-link"><%=session.getAttribute("user")%></a> <a
 							href="<c:url value='/logoff'/>" class="navbar-link">登出</a>
 					</p>
 					<%-- 				<ul class="nav">

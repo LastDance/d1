@@ -14,7 +14,7 @@
 
 	<h2>DMS信息系统</h2>
 	<div>
-		<span class="label label-success"><%=session.getAttribute("sysuser").toString()%>
+		<span class="label label-success"><%=session.getAttribute("user").toString()%>
 			<%=" @ "%> <%=session.getAttribute("loginTimestamp")%></span>
 
 	</div>

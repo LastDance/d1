@@ -1,4 +1,4 @@
-package com.dms.test.model;
+package com.dms.om.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,25 +7,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sysuser")
-public class SysUser {
-
+@Table(name = "user")
+public class User {
+	
 	@Id
-	@Column(name = "id")
+	@Column(name = "user_id")
 	@GeneratedValue
 	private Integer id;
-
-	@Column(name = "username")
+	
+	@Column(name = "user_name")
 	private String username;
-
-	@Column(name = "password")
+	
+	@Column(name = "user_passwd")
 	private String password;
 
-	@Column(name = "email")
+	@Column(name = "user_email")
 	private String email;
 
-	@Column(name = "telephone")
+	@Column(name = "user_telephone")
 	private String telephone;
+	
+	@Column(name = "user_qq")
+	private String qqNbr;
 
 	public Integer getId() {
 		return id;
@@ -67,4 +70,12 @@ public class SysUser {
 		this.telephone = telephone;
 	}
 
+	public String getQqNbr() {
+		return qqNbr;
+	}
+
+	public void setQqNbr(String qqNbr) {
+		this.qqNbr = qqNbr;
+	}
+	
 }
