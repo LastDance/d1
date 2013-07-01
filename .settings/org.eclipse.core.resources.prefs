@@ -3,4 +3,5 @@ encoding//src/main/java=UTF-8
 encoding//src/main/resources=UTF-8
 encoding//src/main/resources/messages_zh_CN.properties=UTF-8
 encoding//src/main/webapp/WEB-INF/jsp/sysUser.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/jsp/test/testPage.jsp=UTF-8
 encoding/<project>=UTF-8
