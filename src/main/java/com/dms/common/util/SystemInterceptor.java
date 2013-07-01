@@ -11,7 +11,12 @@ public class SystemInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler) throws Exception {
 
 		String uri = request.getRequestURI();
-
+		
+		//allow testPage
+		if(uri.indexOf("testPage") != -1){
+			return true;
+		}
+		
 		if (uri.indexOf("login") == -1) {
 			Object user = request.getSession().getAttribute("user");
 			if (user == null) {
