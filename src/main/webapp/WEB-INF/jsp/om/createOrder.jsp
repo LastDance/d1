@@ -26,77 +26,118 @@
 		});
 	</script>
 	<script type="text/javascript">
-		function addOrderLine() {
-			alert("Hello World!");
+		function addLine(rowID) {
+			var itemCnt = $('#orderLinetable tr').length;
+
+			var newItem = '<tr id="item_' + itemCnt + '"">'
+					+ '<td><input type="button" name="remove_line' + itemCnt
+					+ '" value="rem' + itemCnt + '"</td>'
+					+ '<td><input type="text" name="line_item' + itemCnt
+					+ '"</td>' + '<td><input type="text" name="line_quantity'
+					+ itemCnt + '"</td>'
+					+ '<td><input type="text" name="line_price' + itemCnt
+					+ '"</td>' + '<td><input type="text" name="line_status'
+					+ itemCnt + '"</td>' + '</tr>';
+			if (itemCnt == 1) {
+				$('#orderLinetableHeader').after(newItem);
+			} else {
+				$('#item_' + (itemCnt - 1)).after(newItem);
+			}
+		}
+		function removeLine() {
+
 		}
 	</script>
 	<h2>订单录入</h2>
 
 	<form:form method="post" action="createOrder" commandName="order">
 
-		<table>
-			<tr>
-				<td><form:label path="custmerOrderNumber">
-						<spring:message code="label.order.custmerOrderNumber" />
-					</form:label></td>
-				<td><form:input path="custmerOrderNumber" /></td>
-			</tr>
+		<table class="table">
 			<tr>
 				<td><form:label path="customer">
 						<spring:message code="label.order.customer" />
 					</form:label></td>
 				<td><form:input path="customer" /></td>
+				<td><form:label path="custmerOrderNumber">
+						<spring:message code="label.order.custmerOrderNumber" />
+					</form:label></td>
+				<td><form:input path="custmerOrderNumber" /></td>
 			</tr>
+
 			<tr>
 				<td><form:label path="requiredDate">
 						<spring:message code="label.order.requiredDate" />
 					</form:label></td>
 				<td><form:input path="requiredDate" class="datepicker" /></td>
-			</tr>
-
-			<tr>
 				<td><form:label path="status">
 						<spring:message code="label.order.status" />
 					</form:label></td>
 				<td><form:input path="status" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="comment">
-						<spring:message code="label.order.comment" />
-					</form:label></td>
-				<td><form:input path="comment" /></td>
-			</tr>
-			<tr>
-				<td><form:label path="enteredDate" class="datepicker">
+				<td><form:label path="enteredDate">
 						<spring:message code="label.order.enteredDate" />
 					</form:label></td>
-				<td><form:input path="enteredDate" /></td>
-			</tr>
-			<tr>
+				<td><form:input path="enteredDate" class="datepicker" /></td>
 				<td><form:label path="enteredBy">
 						<spring:message code="label.order.enteredBy" />
 					</form:label></td>
 				<td><form:input path="enteredBy" /></td>
 			</tr>
 			<tr>
-				<td><input type="button" id="addOrderLine"
-					onclick="addOrderLine()"
-					value="<spring:message code="label.order.addLine" />" /></td>
-			</tr>
-			<tr>
-				<td>
-					<div id="orderLine">
-						<input type="text" id="item" />
-						<!--  <input type="text" id="price" /> <input
-							type="text" id="quantuty" /> -->
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<td colspan="2"><input type="submit"
-					value="<spring:message code="label.order.create"/>" /></td>
+				<td><form:label path="comment">
+						<spring:message code="label.order.comment" />
+					</form:label></td>
+				<td colspan="3"><form:textarea path="comment" rows="3"
+						style="width:50%" /></td>
 			</tr>
 		</table>
+
+		<fieldset>
+			<legend>
+				<spring:message code="label.order.orderLine" />
+			</legend>
+			<input type="button" id="addOrderLine" onclick="addLine()"
+				class="btn btn-info btn-mini"
+				value="<spring:message code="label.order.addLine" />" />
+
+			<table id='orderLinetable'
+				class="table table-striped table-condensed">
+				<tr id='orderLinetableHeader'>
+					<th>action</th>
+					<th><spring:message code="label.order.line_item" /></th>
+					<th><spring:message code="label.order.line_quantity" /></th>
+					<th><spring:message code="label.order.line_price" /></th>
+					<th><spring:message code="label.order.line_status" /></th>
+				</tr>
+		 		<tr id="item_1">
+					<td></td>
+					<td><form:input path="orderLines[0].item"
+							name="line_item1" /></td>
+					<td><form:input path="orderLines[0].lineQuantity"
+							name="line_item1" /></td>
+					<td><form:input path="orderLines[0].itemPrice"
+							name="line_item1" /></td>
+					<td><form:input path="orderLines[0].status"
+							name="line_item1" /></td>
+				</tr> 
+<%-- 				<c:forEach varStatus="vs" items="${order.orderLines}">
+					<tr>
+						<td></td>
+						<td><form:input path="orderLines[${vs.index}].item"
+								name="line_item1" /></td>
+						<td><form:input path="orderLines[${vs.index}].lineQuantity"
+								name="line_item1" /></td>
+						<td><form:input path="orderLines[${vs.index}].itemPrice"
+								name="line_item1" /></td>
+						<td><form:input path="orderLines[${vs.index}].status"
+								name="line_item1" /></td>
+					</tr>
+				</c:forEach> --%>
+			</table>
+		</fieldset>
+		<input type="submit" class="btn btn-primary"
+			value="<spring:message code="label.order.create"/>" />
 	</form:form>
 </body>
 </html>

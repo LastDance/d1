@@ -48,12 +48,12 @@ body {
 					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="brand" style="color:#FFF" href="<c:url value='/welcome'/>">DMS</a>
+				<a class="brand" style="color: #FFF"
+					href="<c:url value='/welcome'/>">DMS</a>
 				<div class="nav-collapse collapse">
 					<p class="navbar-text pull-right">
-						<a href=""
-							class="navbar-link"><%=session.getAttribute("user")%></a> <a
-							href="<c:url value='/logoff'/>" class="navbar-link">登出</a>
+						<a href="" class="navbar-link"><%=session.getAttribute("user")%></a>
+						<a href="<c:url value='/logoff'/>" class="navbar-link">登出</a>
 					</p>
 					<%-- 				<ul class="nav">
 						<li <%if (pageCategory.equals("welcome")) {%> class="active" <%}%>><a
@@ -63,12 +63,27 @@ body {
 					</ul>
  --%>
 					<ul class="nav">
-						<li class="dropdown <%if (pageCategory.equals("user")) {%>active<%}%>"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" data-hover="dropdown" data-delay="1000"
-							data-close-others="false"> 用户管理<b class="caret"></b>
+						<li
+							class="dropdown <%if (pageCategory.equals("user")) {%>active<%}%>"><a
+							href="#" class="dropdown-toggle" data-toggle="dropdown"
+							data-hover="dropdown" data-delay="1000" data-close-others="false">
+								用户管理<b class="caret"></b>
 						</a>
 							<ul class="dropdown-menu">
 								<li><a tabindex="-1" href="#">管理</a></li>
+								<li><a tabindex="-1" href="#">浏览</a></li>
+								<li><a tabindex="-1" href="#">增加</a></li>
+								<li><a tabindex="-1" href="#">删除</a></li>
+							</ul></li>
+						<li
+							class="dropdown <%if (pageCategory.equals("OM")) {%>active<%}%>"><a
+							href="#" class="dropdown-toggle" data-toggle="dropdown"
+							data-hover="dropdown" data-delay="1000" data-close-others="false">
+								订单管理<b class="caret"></b>
+						</a>
+							<ul class="dropdown-menu">
+								<li><a tabindex="-1"
+									href="<c:url value='/order/createOrder'/>">录入</a></li>
 								<li><a tabindex="-1" href="#">浏览</a></li>
 								<li><a tabindex="-1" href="#">增加</a></li>
 								<li><a tabindex="-1" href="#">删除</a></li>
@@ -90,6 +105,8 @@ body {
 							href="<c:url value='/welcome'/>">首页</a></li>
 						<li <%if (pageName.equals("userManagement")) {%> class="active"
 							<%}%>><a href="<c:url value='/user'/>">用户管理</a></li>
+						<li <%if (pageName.equals("createOrder")) {%> class="active" <%}%>><a
+							href="<c:url value='/order/createOrder'/>">订单录入</a></li>
 						<li <%if (pageName.equals("underwork")) {%> class="active" <%}%>><a
 							href="<c:url value='/underwork'/>">研发中...</a></li>
 					</ul>

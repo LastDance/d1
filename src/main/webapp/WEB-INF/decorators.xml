@@ -2,8 +2,6 @@
 <decorators defaultDir="/WEB-INF/jsp/layout">
 	<excludes>
 		<pattern>*login*</pattern>
-	</excludes>
-	<excludes>
 		<pattern>*testPage*</pattern>
 	</excludes>
 	<decorator name="basic-theme" page="basic-theme.jsp">

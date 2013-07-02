@@ -44,6 +44,7 @@ public class OrderController {
 			BindingResult result, HttpServletRequest request) {
 		
 		logger.info("order created");
+		order.getOrderLines().get(0).getItem();
 		order.setNumber("so000");
 		orderService.createOrder(order);
 		return "om/createOrder";
