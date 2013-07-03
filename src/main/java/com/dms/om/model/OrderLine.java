@@ -2,8 +2,10 @@ package com.dms.om.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,8 +21,8 @@ public class OrderLine {
 	@GeneratedValue
 	private Integer id;
 
-	@ManyToOne
-	@JoinColumn(name = "ord_id")
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
+	@JoinColumn(name = "ordl_ord_id" ,referencedColumnName="ord_id")
 	private Order order;
 	
 	public Order getOrder() {
@@ -31,11 +33,8 @@ public class OrderLine {
 		this.order = order;
 	}
 
-	@Column(name = "ordl_ord_id")
-	private String orderId;
-
 	@Column(name = "ordl_nbr")
-	private String line;
+	private int line;
 
 	@Column(name = "ordl_item")
 	private String item;
@@ -69,20 +68,12 @@ public class OrderLine {
 		this.id = id;
 	}
 
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
-
-	public String getLine() {
+	public int getLine() {
 		return line;
 	}
 
-	public void setLine(String line) {
-		this.line = line;
+	public void setLine(int lineNumber) {
+		this.line = lineNumber;
 	}
 
 	public String getItem() {

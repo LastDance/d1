@@ -44,11 +44,9 @@ public class OrderController {
 	public String addOrder(@ModelAttribute("order") Order order,
 			BindingResult result, HttpServletRequest request) {
 		
-		logger.info("order created");
-		order.getOrderLines().get(0).getItem();
-		order.setNumber("so000");
-		
+		orderService.genOrderNumbers(order);
 		orderService.createOrder(order);
+		logger.info("order created");
 		return "om/createOrder";
 	}
 }
