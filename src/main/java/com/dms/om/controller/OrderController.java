@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dms.om.model.Order;
+import com.dms.om.model.OrderLine;
 import com.dms.om.service.IOrderService;
 
 @Controller
@@ -34,7 +35,7 @@ public class OrderController {
 		Order order = new Order();
 		order.setEnteredBy(userLoged);
 		order.setEnteredDate(date);
-		
+		order.getOrderLines().add(new OrderLine());
 		map.put("order", order);
 		return "om/createOrder";
 	}
@@ -46,6 +47,7 @@ public class OrderController {
 		logger.info("order created");
 		order.getOrderLines().get(0).getItem();
 		order.setNumber("so000");
+		
 		orderService.createOrder(order);
 		return "om/createOrder";
 	}

@@ -27,21 +27,21 @@
 	</script>
 	<script type="text/javascript">
 		function addLine(rowID) {
-			var itemCnt = $('#orderLinetable tr').length;
+			var itemCnt = $('#orderLinetable tr').length - 1 ;
 
-			var newItem = '<tr id="item_' + itemCnt + '"">'
+			var newItem = '<tr id="order_line_' + itemCnt + '"">'
 					+ '<td><input type="button" name="remove_line' + itemCnt
-					+ '" value="rem' + itemCnt + '"</td>'
-					+ '<td><input type="text" name="line_item' + itemCnt
-					+ '"</td>' + '<td><input type="text" name="line_quantity'
-					+ itemCnt + '"</td>'
-					+ '<td><input type="text" name="line_price' + itemCnt
-					+ '"</td>' + '<td><input type="text" name="line_status'
-					+ itemCnt + '"</td>' + '</tr>';
+					+ '" value="rem' + itemCnt + '" /></td>'
+					+ '<td><input type="text" name="orderLines['+ itemCnt + '].item' + '/>'
+					+ '"</td>' + '<td><input type="text" name="orderLines['+ itemCnt + '].lineQuantity' + '/>'
+					+ '"</td>'
+					+ '<td><input type="text" name="orderLines['+ itemCnt + '].itemPrice' + '/>'
+					+ '"</td>' + '<td><input type="text" name="orderLines['+ itemCnt + '].status'
+					 + '"</td>' + '</tr>';
 			if (itemCnt == 1) {
 				$('#orderLinetableHeader').after(newItem);
 			} else {
-				$('#item_' + (itemCnt - 1)).after(newItem);
+				$('#order_line_' + (itemCnt - 2)).after(newItem);
 			}
 		}
 		function removeLine() {
@@ -110,7 +110,7 @@
 					<th><spring:message code="label.order.line_price" /></th>
 					<th><spring:message code="label.order.line_status" /></th>
 				</tr>
-		 		<tr id="item_1">
+	<%-- 	 		<tr id="item_1">
 					<td></td>
 					<td><form:input path="orderLines[0].item"
 							name="line_item1" /></td>
@@ -120,20 +120,20 @@
 							name="line_item1" /></td>
 					<td><form:input path="orderLines[0].status"
 							name="line_item1" /></td>
-				</tr> 
-<%-- 				<c:forEach varStatus="vs" items="${order.orderLines}">
-					<tr>
+				</tr>  --%>
+ 				<c:forEach items="${order.orderLines}" var="orderLine" varStatus="vs" >
+					<tr id="order_line_${vs.index}"  >
 						<td></td>
 						<td><form:input path="orderLines[${vs.index}].item"
-								name="line_item1" /></td>
+								name="line_item_${vs.index}" /></td>
 						<td><form:input path="orderLines[${vs.index}].lineQuantity"
-								name="line_item1" /></td>
+								name="line_item_${vs.index}" /></td>
 						<td><form:input path="orderLines[${vs.index}].itemPrice"
-								name="line_item1" /></td>
+								name="line_item_${vs.index}" /></td>
 						<td><form:input path="orderLines[${vs.index}].status"
-								name="line_item1" /></td>
+								name="line_item_${vs.index}" /></td>
 					</tr>
-				</c:forEach> --%>
+				</c:forEach> 
 			</table>
 		</fieldset>
 		<input type="submit" class="btn btn-primary"
