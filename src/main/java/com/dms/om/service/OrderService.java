@@ -42,8 +42,10 @@ public class OrderService implements IOrderService {
 		for (int i = 0; i< order.getOrderLines().size(); i ++){
 			if(order.getOrderLines().get(i).getItem().equals("####order_line_deleted###"))
 				order.getOrderLines().remove(i);
-			else
+			else{
+				order.getOrderLines().get(i).setOrder(order);
 				order.getOrderLines().get(i).setLine(lineNumber);
+			}
 		}
 	}
 }
