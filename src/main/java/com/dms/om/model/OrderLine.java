@@ -21,10 +21,10 @@ public class OrderLine {
 	@GeneratedValue
 	private Integer id;
 
-	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.PERSIST)
-	@JoinColumn(name = "ordl_ord_id" ,referencedColumnName="ord_id")
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "ordl_ord_id", referencedColumnName = "ord_id")
 	private Order order;
-	
+
 	public Order getOrder() {
 		return order;
 	}
@@ -37,7 +37,7 @@ public class OrderLine {
 	private int line;
 
 	@Column(name = "ordl_item")
-	private String item;
+	private String lineItem;
 
 	@Column(name = "ordl_item_price")
 	private Double itemPrice;
@@ -60,6 +60,17 @@ public class OrderLine {
 	@Column(name = "ordl_comment")
 	private String comment;
 
+	@Column(name = "ordl_active")
+	private boolean active;
+	
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -76,12 +87,12 @@ public class OrderLine {
 		this.line = lineNumber;
 	}
 
-	public String getItem() {
-		return item;
+	public String getLineItem() {
+		return lineItem;
 	}
 
-	public void setItem(String item) {
-		this.item = item;
+	public void setLineItem(String lineItem) {
+		this.lineItem = lineItem;
 	}
 
 	public Double getItemPrice() {

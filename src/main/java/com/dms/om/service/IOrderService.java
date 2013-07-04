@@ -12,8 +12,13 @@ public interface IOrderService {
 	public void removeOrder();
 
 	public List<Order> getOrder(String number);
-
-	public void genOrderNumbers(Order order);
+	
+	public void removeDeletedOrderLines(Order order);
 	
 	public List<OrderStatus> getOrderStatusList();
+
+	public Order initializeOrder(String enteredBy);
+
+	public Order SetOrderStatus(String step, Order order);
+	
 }

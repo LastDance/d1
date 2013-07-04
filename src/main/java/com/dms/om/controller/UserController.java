@@ -76,7 +76,6 @@ public class UserController {
 			request.getSession().setAttribute("loginTimestamp", sdf.format(date));
 			return "redirect:/welcome";
 		}
-
 	}
 
 	@RequestMapping("/user")

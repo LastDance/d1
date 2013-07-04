@@ -1,7 +1,5 @@
 package com.dms.om.controller;
 
-import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dms.om.model.Order;
-import com.dms.om.model.OrderLine;
-import com.dms.om.model.OrderStatus;
 import com.dms.om.service.IOrderService;
+import com.dms.om.validator.OrderValidator;
 
 @Controller
 @RequestMapping("/order")
@@ -32,30 +29,43 @@ public class OrderController {
 	public String createOrder(Map<String, Object> map,
 			HttpServletRequest request) {
 		String userLoged = (String) request.getSession().getAttribute("user");
-		Date date = new Date();
+		Order order = orderService.initializeOrder(userLoged);
 
-		Order order = new Order();
-		order.setEnteredBy(userLoged);
-		order.setEnteredDate(date);
-		order.getOrderLines().add(new OrderLine());
 		map.put("order", order);
-		
-		List<OrderStatus> orderStatusList = orderService.getOrderStatusList();
-		for(OrderStatus s : orderStatusList){
-			System.out.println(s.getId());
-			System.out.println(s.getOrderStatus());
-		}
-		map.put("statusList", orderStatusList);
+
+		// TODO order status
+		// List<OrderStatus> orderStatusList =
+		// orderService.getOrderStatusList();
+		// for(OrderStatus s : orderStatusList){
+		// System.out.println(s.getId());
+		// System.out.println(s.getOrderStatus());
+		// }
+		// map.put("statusList", orderStatusList);
 		return "om/createOrder";
 	}
 
 	@RequestMapping(value = "/createOrder", method = RequestMethod.POST)
 	public String addOrder(@ModelAttribute("order") Order order,
 			BindingResult result, HttpServletRequest request) {
-		orderService.genOrderNumbers(order);
-		orderService.createOrder(order);
-		logger.info("order created");
-		return "om/createOrder";
+		
+		orderService.removeDeletedOrderLines(order);
+
+		OrderValidator orderValidator = new OrderValidator();
+		orderValidator.validate(order, result);
+		
+//		for (OrderLine line : order.getOrderLines())
+//			orderLineValidator.validate(line, result);
+		if (result.hasErrors()) {
+			return "om/createOrder";
+		} else {
+			//TODO order prefix & status
+			order.setPrefix("test");
+			orderService.SetOrderStatus("create", order);
+			orderService.createOrder(order);
+			
+			logger.info("order created");
+			return "om/createOrder";
+		}
 	}
-	
+
 }
