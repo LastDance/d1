@@ -12,7 +12,7 @@ user_qq              int            user qq number
 Order Master
 =====================================================================
 ord_id	    		 int             auto_increament PK
-ord_nbr	 			 varchar(20) 	 order number			
+ord_prefix	 		 varchar(8) 	 order prefix			
 ord_cust_nbr 		 varchar(40)	 customer reference order number
 ord_customer         varchar(40)   	 customer
 ord_entered_date	 date            the day order was entered
@@ -39,6 +39,7 @@ ordl_reviewed_date   date            order line reviewed date
 ordl_comment         varchar(200)	 order line commnet
 ====================================================================
 
-Order Control
+Order Status
 ====================================================================
+ords_status          varchar(10)	order_status(PK)       
 ====================================================================

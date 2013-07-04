@@ -8,6 +8,7 @@
 		<mapping class="com.dms.om.model.User" />
 		<mapping class="com.dms.om.model.Order" />
 		<mapping class="com.dms.om.model.OrderLine" />
+		<mapping class="com.dms.om.model.OrderStatus" />
 	</session-factory>
 
 </hibernate-configuration>

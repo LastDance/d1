@@ -18,7 +18,7 @@ import org.apache.commons.collections.list.LazyList;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name = "sales_order")
+@Table(name = "order_master")
 public class Order {
 
 	@Id
@@ -26,8 +26,8 @@ public class Order {
 	@GeneratedValue
 	private Integer id;
 
-	@Column(name = "ord_nbr")
-	private String number;
+	@Column(name = "ord_prefix")
+	private String prefix;
 
 	@Column(name = "ord_cust_nbr")
 	private String custmerOrderNumber;
@@ -81,12 +81,12 @@ public class Order {
 		this.id = id;
 	}
 
-	public String getNumber() {
-		return number;
+	public String getPrefix() {
+		return prefix;
 	}
 
-	public void setNumber(String number) {
-		this.number = number;
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
 	}
 
 	public String getCustmerOrderNumber() {

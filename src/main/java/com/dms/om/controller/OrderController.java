@@ -1,6 +1,7 @@
 package com.dms.om.controller;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dms.om.model.Order;
 import com.dms.om.model.OrderLine;
+import com.dms.om.model.OrderStatus;
 import com.dms.om.service.IOrderService;
 
 @Controller
@@ -37,16 +39,23 @@ public class OrderController {
 		order.setEnteredDate(date);
 		order.getOrderLines().add(new OrderLine());
 		map.put("order", order);
+		
+		List<OrderStatus> orderStatusList = orderService.getOrderStatusList();
+		for(OrderStatus s : orderStatusList){
+			System.out.println(s.getId());
+			System.out.println(s.getOrderStatus());
+		}
+		map.put("statusList", orderStatusList);
 		return "om/createOrder";
 	}
 
 	@RequestMapping(value = "/createOrder", method = RequestMethod.POST)
 	public String addOrder(@ModelAttribute("order") Order order,
 			BindingResult result, HttpServletRequest request) {
-		
 		orderService.genOrderNumbers(order);
 		orderService.createOrder(order);
 		logger.info("order created");
 		return "om/createOrder";
 	}
+	
 }
