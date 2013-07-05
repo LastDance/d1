@@ -1,28 +1,27 @@
 package com.dms.om.controller;
 
-import java.util.List;
 import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dms.om.model.OrderControl;
-import com.dms.om.model.OrderStatus;
-import com.dms.om.service.IOrderService;
+import com.dms.om.model.TestForm;
 
 @Controller
 public class TestPageController {
-	@Autowired
-	private IOrderService orderService;
 	
 	@RequestMapping("/testPage")
 	public String welcome(Map<String, Object> map) {
-		
-		OrderControl orderControl = new OrderControl();
-		orderControl.setOrderPrefix("WO");
-		orderControl.setOrderStatusOptions(orderService.getOrderStatusList());
-		map.put("orderControl", orderControl);
+		map.put("testForm", new TestForm());
+		return "test/testPage";
+	}
+	
+	@RequestMapping(value = "/testPageSave", method = RequestMethod.POST)
+	public String save(@ModelAttribute("testFrom") TestForm uploadForm,
+            Model map) {
 		
 		return "test/testPage";
 	}

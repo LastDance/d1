@@ -12,16 +12,11 @@
 
 </head>
 <body>
-	<form:form method="post" commandName="orderControl">
-		<form:select path="orderPrefix">
-			<c:forEach items="${orderControl.orderStatusOptions}" var="orders">
-				<option value="${orders.orderStatus}">${orders.orderStatus}</option>
-			</c:forEach>
-		</form:select>
-	</form:form>
+	<form:form method="post" action="testPageSave" modelAttribute="testForm"
+		enctype="multipart/form-data">
 
-	<c:forEach items="${orderControl.orderStatusOptions}" var="orders">
-		status: <c:out value="${orders.orderStatus}" />
-	</c:forEach>
+		<form:input type="file" path="imageFile" />
+		<input type="submit" value="Upload" />
+	</form:form>
 </body>
 </html>
