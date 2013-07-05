@@ -1,4 +1,4 @@
-package com.dms.om.controller;
+package com.dms.common.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,10 +16,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.dms.common.model.User;
+import com.dms.common.service.IUserService;
 import com.dms.common.util.Encryption;
-import com.dms.om.model.User;
-import com.dms.om.service.IUserService;
-import com.dms.om.validator.LoginValidator;
+import com.dms.common.validator.LoginValidator;
 
 @Controller
 public class UserController {

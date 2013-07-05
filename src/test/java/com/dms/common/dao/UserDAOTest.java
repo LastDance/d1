@@ -1,4 +1,4 @@
-package com.dms.om.dao;
+package com.dms.common.dao;
 
 import static org.junit.Assert.*;
 

@@ -1,4 +1,4 @@
-package com.dms.om.controller;
+package com.dms.common.controller;
 
 import java.util.Map;
 
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.dms.om.model.TestForm;
+import com.dms.common.model.TestForm;
 
 @Controller
 public class TestPageController {

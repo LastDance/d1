@@ -1,8 +1,8 @@
-package com.dms.om.service;
+package com.dms.common.service;
 
 import java.util.List;
 
-import com.dms.om.model.User;
+import com.dms.common.model.User;
 
 public interface IUserService {
 

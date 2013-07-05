@@ -1,4 +1,4 @@
-package com.dms.om.model;
+package com.dms.common.model;
 
 import org.springframework.web.multipart.MultipartFile;
 

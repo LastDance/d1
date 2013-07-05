@@ -1,8 +1,9 @@
-package com.dms.om.dao;
+package com.dms.common.dao;
 
 import java.util.List;
 
-import com.dms.om.model.User;
+import com.dms.common.model.User;
+
 
 public interface IUserDAO {
 	

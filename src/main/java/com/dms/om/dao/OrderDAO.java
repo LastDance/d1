@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.dms.common.dao.AbstractHibernateDAO;
 import com.dms.om.model.Order;
 
 @Repository

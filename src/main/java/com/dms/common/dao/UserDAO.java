@@ -1,10 +1,11 @@
-package com.dms.om.dao;
+package com.dms.common.dao;
 
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.dms.om.model.User;
+import com.dms.common.model.User;
+
 
 @Repository
 public class UserDAO extends AbstractHibernateDAO<User> implements IUserDAO {
