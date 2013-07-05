@@ -2,21 +2,20 @@ package com.dms.om.dao;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.dms.om.model.Order;
 
 @Repository
-public class OrderDAO implements IOrderDAO{
-
-	@Autowired
-	private SessionFactory sessionFactory;
+public class OrderDAO extends AbstractHibernateDAO<Order> implements IOrderDAO{
 	
+	public OrderDAO() {
+		setClazz(Order.class);
+	}
+
 	@Override
 	public void createOrder(Order order) {
-		sessionFactory.getCurrentSession().save(order);
+		super.save(order);
 	}
 
 	@Override
