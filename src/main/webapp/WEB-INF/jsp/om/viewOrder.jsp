@@ -6,14 +6,81 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="currentPage" content="welcome"/>
-<meta name="currentCategory" content="welcome"/>
-<title>欢迎 | DMS</title>
+<meta name="currentPage" content="createOrder" />
+<meta name="currentCategory" content="OM" />
+
+<title>订单浏览 | DMS</title>
 </head>
 <body>
+	<h2>订单浏览</h2>
+	<c:if test="${not empty message}">
+		<div class="alert alert-info fade in" style="text-align: center">
+			<a class="close" data-dismiss="alert" href="#">&times;</a> <span>
+				${message} </span> <br />
+		</div>
+	</c:if>
 
-	<h2>View ORder</h2>
-
+	<table class="table">
+		<tr>
+			<td><spring:message code="label.order.number" /></td>
+			<td>${order.prefix }${order.id }</td>
+			<td><spring:message code="label.order.status" /></td>
+			<td>${order.status }</td>
+		</tr>
+		<tr>
+			<td><spring:message code="label.order.customer" /></td>
+			<td>${order.customer }</td>
+			<td><spring:message code="label.order.custmerOrderNumber" /></td>
+			<td>${order.custmerOrderNumber }</td>
+		</tr>
+		<tr>
+			<td><spring:message code="label.order.enteredBy" /></td>
+			<td>${order.enteredBy }</td>
+			<td><spring:message code="label.order.enteredDate" /></td>
+			<td>${order.enteredDate }</td>
+		</tr>
+		<tr>
+			<td><spring:message code="label.order.reviewedBy" /></td>
+			<td>${order.reviewedBy }</td>
+			<td><spring:message code="label.order.reviewedDate" /></td>
+			<td>${order.reviewedDate }</td>
+		</tr>
+		<tr>
+			<td><spring:message code="label.order.comment" /></td>
+			<td colspan="3">${order.comment }</td>
+		</tr>
+	</table>
+	<fieldset>
+		<legend>
+			<spring:message code="label.order.orderLine" />
+		</legend>
+		<table class='table table-striped table-condensed'>
+			<tr>
+				<th><spring:message code="label.order.line" /></th>
+				<th><spring:message code="label.order.lineItem" /></th>
+				<th><spring:message code="label.order.linePrice" /></th>
+				<th><spring:message code="label.order.lineQuantity" /></th>
+				<th><spring:message code="label.order.lineStatus" /></th>
+			<%-- 	<th><spring:message code="label.order.lineRequiredDate" /></th> --%>
+				<th><spring:message code="label.order.lineReviewedBy" /></th>
+				<th><spring:message code="label.order.lineReviewedDate" /></th>
+				<th><spring:message code="label.order.lineComment" /></th>
+			</tr>
+			<c:forEach var="line" items="${order.orderLines}">
+				<tr>
+					<td>${line.line }</td>
+					<td>${line.lineItem }</td>
+					<td>${line.itemPrice }</td>
+					<td>${line.lineQuantity }</td>
+					<td>${line.status }</td>
+		<%-- 			<td>${line.requiredDate }</td> --%>
+					<td>${line.reviewedBy }</td>
+					<td>${line.reviewedDate }</td>
+					<td>${line.comment }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</fieldset>
 
 </body>
 </html>

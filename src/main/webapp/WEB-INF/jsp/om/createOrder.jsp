@@ -36,8 +36,8 @@
 					+ itemCnt
 					+ '" value="删除此条" /></td>'
 					+ '<td><input type="text" id="lineItem' + itemCnt + '" name="orderLines['+ itemCnt + '].lineItem"' + '/></td>'
-					+ '<td><input type="number" id="lineQuantity'+ itemCnt + '" name="orderLines['+ itemCnt + '].lineQuantity"' + '/></td>'
-					+ '<td><input type="number" id="itemPrice'+ itemCnt +'" name="orderLines['+ itemCnt + '].itemPrice"' + '/></td>'
+					+ '<td><input type="number" step="any" id="lineQuantity'+ itemCnt + '" name="orderLines['+ itemCnt + '].lineQuantity"' + '/></td>'
+					+ '<td><input type="number" step="any" id="itemPrice'+ itemCnt +'" name="orderLines['+ itemCnt + '].itemPrice"' + '/></td>'
 					+ '<td><input type="text" id="comment'+ itemCnt +'" name="orderLines['+ itemCnt + '].comment"' + '/></td>'
 					+ '<td><input type="hidden" id="active'+ itemCnt + '" name="orderLines['+ itemCnt +'].active" value="true" /></td>'
 					+ '</tr>';
@@ -97,10 +97,10 @@
 					<th width="50px"><input type="button" id="addOrderLine" onclick="addLine()"
 						class="btn btn-info btn-mini"
 						value="<spring:message code="label.order.addLine" />" /></th>
-					<th><spring:message code="label.order.line_item" /></th>
-					<th><spring:message code="label.order.line_quantity" /></th>
-					<th><spring:message code="label.order.line_price" /></th>
-					<th><spring:message code="label.order.line_comment" /></th>
+					<th><spring:message code="label.order.lineItem" /></th>
+					<th><spring:message code="label.order.lineQuantity" /></th>
+					<th><spring:message code="label.order.linePrice" /></th>
+					<th><spring:message code="label.order.lineComment" /></th>
 				</tr>
 				<c:forEach items="${order.orderLines}" var="orderLine"
 					varStatus="vs">

@@ -22,9 +22,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "order_master")
 public class Order implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2187923648564872172L;
 
 	@Id

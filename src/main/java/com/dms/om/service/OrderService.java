@@ -33,8 +33,8 @@ public class OrderService implements IOrderService {
 	}
 
 	@Transactional
-	public List<Order> getOrder(String number) {
-		return null;
+	public Order getOrder(int id) {
+		return orderDAO.getOrder(id);
 	}
 
 	@Transactional

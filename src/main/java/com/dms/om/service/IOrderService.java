@@ -11,7 +11,7 @@ public interface IOrderService {
 
 	public void removeOrder();
 
-	public List<Order> getOrder(String number);
+	public Order getOrder(int id);
 	
 	public void removeDeletedOrderLines(Order order);
 	
