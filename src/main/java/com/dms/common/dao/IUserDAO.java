@@ -12,4 +12,7 @@ public interface IUserDAO {
 	public void createUser(User user);
 
 	public void removeUser(Integer id);
+	
+	public abstract List<User> listUsers();
+	
 }

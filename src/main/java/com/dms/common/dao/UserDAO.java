@@ -35,5 +35,10 @@ public class UserDAO extends AbstractHibernateDAO<User> implements IUserDAO {
 		}*/
 		super.deleteById(id);
 	}
+	
+	@Override
+	public List<User> listUsers() {
+		return super.findAll();
+	}
 
 }

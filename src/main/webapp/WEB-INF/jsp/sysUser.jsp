@@ -14,7 +14,7 @@
  
 <h2>System User Manager</h2>
  
-<form:form method="post" action="add.html" commandName="sysUser">
+<form:form method="post" action="/user/create" commandName="sysUser">
  
     <table>
     <tr>

@@ -52,6 +52,14 @@ public class UserController {
 		return "login";
 	}
 
+	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
+	public String createUser(@ModelAttribute("sysUser") User user,
+			BindingResult result, HttpServletRequest request) {
+		user.setPassword(Encryption.encrypt(user.getPassword()));
+		userService.createUser(user);
+		return "redirect:/welcome";
+	}
+	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String authenticate(@ModelAttribute("user") User user,
 			BindingResult result, HttpServletRequest request) {
@@ -82,9 +90,10 @@ public class UserController {
 
 	@RequestMapping("/user")
 	public String listSysUsers(Map<String, Object> map) {
-		map.put("user", new User());
+		map.put("sysUser", new User());
 		return "user";
 	}
+	
 
 	// @RequestMapping(value = "/add", method = RequestMethod.POST)
 	// public String addSysUser(@ModelAttribute("sysUser") User sysUser,
