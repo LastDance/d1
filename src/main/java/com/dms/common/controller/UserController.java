@@ -28,24 +28,24 @@ public class UserController {
 	private IUserService userService;
 
 	private static final Logger logger = Logger
-			.getLogger(UserController.class);
+			.getLogger(UserControllerTest.class);
 
 	@RequestMapping("/welcome")
 	public String welcome(Map<String, Object> map) {
 		return "welcome";
 	}
-	
+
 	@RequestMapping("/logoff")
 	public String logoff(HttpServletRequest request) {
 		request.getSession().invalidate();
 		return "redirect:/login";
 	}
-	
+
 	@RequestMapping("/underwork")
 	public String underWork(Map<String, Object> map) {
 		return "underwork";
 	}
-	
+
 	@RequestMapping("/login")
 	public String login(Map<String, Object> map) {
 		map.put("user", new User());
@@ -70,10 +70,12 @@ public class UserController {
 		} else {
 			Date date = new Date();
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
-			
-			logger.info(user.getUsername()+ " logged in at " + sdf.format(date));
+
+			logger.info(user.getUsername() + " logged in at "
+					+ sdf.format(date));
 			request.getSession().setAttribute("user", user.getUsername());
-			request.getSession().setAttribute("loginTimestamp", sdf.format(date));
+			request.getSession().setAttribute("loginTimestamp",
+					sdf.format(date));
 			return "redirect:/welcome";
 		}
 	}
@@ -84,20 +86,21 @@ public class UserController {
 		return "user";
 	}
 
-//	@RequestMapping(value = "/add", method = RequestMethod.POST)
-//	public String addSysUser(@ModelAttribute("sysUser") User sysUser,
-//			BindingResult result) {
-//		sysUser.setPassword(Encryption.encrypt(sysUser.getPassword()));
-//		sysUserService.addSysUser(sysUser);
-//
-//		return "redirect:/user";
-//	}
-//
-//	@RequestMapping("/delete/{sysUserId}")
-//	public String deleteSysUser(@PathVariable("sysUserId") Integer sysUserId) {
-//		sysUserService.removeSysUser(sysUserId);
-//
-//		return "redirect:/user";
-//	}
+	// @RequestMapping(value = "/add", method = RequestMethod.POST)
+	// public String addSysUser(@ModelAttribute("sysUser") User sysUser,
+	// BindingResult result) {
+	// sysUser.setPassword(Encryption.encrypt(sysUser.getPassword()));
+	// sysUserService.addSysUser(sysUser);
+	//
+	// return "redirect:/user";
+	// }
+	//
+	// @RequestMapping("/delete/{sysUserId}")
+	// public String deleteSysUser(@PathVariable("sysUserId") Integer sysUserId)
+	// {
+	// sysUserService.removeSysUser(sysUserId);
+	//
+	// return "redirect:/user";
+	// }
 
 }
