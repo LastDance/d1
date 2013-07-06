@@ -6,9 +6,12 @@
 <hibernate-configuration>
 	<session-factory>
 		<mapping class="com.dms.common.model.User" />
+		
+		<mapping class="com.dms.common.model.ReviewComment" />
+		
 		<mapping class="com.dms.om.model.Order" />
 		<mapping class="com.dms.om.model.OrderLine" />
-		<mapping class="com.dms.om.model.OrderStatus" />
+		<!-- <mapping class="com.dms.om.model.OrderStatus" /> -->
 	</session-factory>
 
 </hibernate-configuration>

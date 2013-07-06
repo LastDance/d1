@@ -10,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -17,6 +18,8 @@ import javax.persistence.Table;
 import org.apache.commons.collections.FactoryUtils;
 import org.apache.commons.collections.list.LazyList;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.dms.common.model.ReviewComment;
 
 @Entity
 @Table(name = "order_master")
@@ -26,7 +29,7 @@ public class Order implements Serializable {
 
 	@Id
 	@Column(name = "ord_id")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 
 	@Column(name = "ord_prefix")
@@ -35,38 +38,37 @@ public class Order implements Serializable {
 	@Column(name = "ord_cust_nbr")
 	private String custmerOrderNumber;
 
-	@Column(name = "ord_customer")
+	@Column(name = "ord_cust")
 	private String customer;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "ord_entered_date")
+	@Column(name = "ord_ent_date")
 	private Date enteredDate;
 
-	@Column(name = "ord_entered_by")
+	@Column(name = "ord_ent_by")
 	private String enteredBy;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "ord_required_date")
+	@Column(name = "ord_req_date")
 	private Date requiredDate;
-
-	@Column(name = "ord_reviewed_by")
-	private String reviewedBy;
-
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Column(name = "ord_reviewed_date")
-	private Date reviewedDate;
 
 	@Column(name = "ord_status")
 	private String status;
 
-	@Column(name = "ord_comment")
+	@Column(name = "ord_cmt")
 	private String comment;
 
 	@SuppressWarnings("unchecked")
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<OrderLine> orderLines = LazyList.decorate(
 			new ArrayList<OrderLine>(),
 			FactoryUtils.instantiateFactory(OrderLine.class));
+	
+	@SuppressWarnings("unchecked")
+	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<ReviewComment> reviews = LazyList.decorate(
+			new ArrayList<ReviewComment>(),
+			FactoryUtils.instantiateFactory(ReviewComment.class));
 
 	public List<OrderLine> getOrderLines() {
 		return orderLines;
@@ -132,20 +134,12 @@ public class Order implements Serializable {
 		this.requiredDate = requiredDate;
 	}
 
-	public String getReviewedBy() {
-		return reviewedBy;
+	public List<ReviewComment> getReviews() {
+		return reviews;
 	}
 
-	public void setReviewedBy(String reviewedBy) {
-		this.reviewedBy = reviewedBy;
-	}
-
-	public Date getReviewedDate() {
-		return reviewedDate;
-	}
-
-	public void setReviewedDate(Date reviewedDate) {
-		this.reviewedDate = reviewedDate;
+	public void setReviews(List<ReviewComment> reviews) {
+		this.reviews = reviews;
 	}
 
 	public String getStatus() {

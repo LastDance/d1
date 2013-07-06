@@ -1,26 +1,20 @@
 package com.dms.om.service;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dms.om.dao.IOrderDAO;
-import com.dms.om.dao.IOrderStatusDAO;
 import com.dms.om.model.Order;
 import com.dms.om.model.OrderLine;
-import com.dms.om.model.OrderStatus;
 
 @Service
 public class OrderService implements IOrderService {
 
 	@Autowired
 	private IOrderDAO orderDAO;
-
-	@Autowired
-	private IOrderStatusDAO orderStatusDAO;
 
 	@Transactional
 	public void createOrder(Order order) {
@@ -35,11 +29,6 @@ public class OrderService implements IOrderService {
 	@Transactional
 	public Order getOrder(int id) {
 		return orderDAO.getOrder(id);
-	}
-
-	@Transactional
-	public List<OrderStatus> getOrderStatusList() {
-		return orderStatusDAO.getOrderStatus();
 	}
 
 	@Override

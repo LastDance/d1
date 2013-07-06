@@ -40,12 +40,6 @@
 			<td>${order.enteredDate }</td>
 		</tr>
 		<tr>
-			<td><spring:message code="label.order.reviewedBy" /></td>
-			<td>${order.reviewedBy }</td>
-			<td><spring:message code="label.order.reviewedDate" /></td>
-			<td>${order.reviewedDate }</td>
-		</tr>
-		<tr>
 			<td><spring:message code="label.order.comment" /></td>
 			<td colspan="3">${order.comment }</td>
 		</tr>
@@ -61,9 +55,6 @@
 				<th><spring:message code="label.order.linePrice" /></th>
 				<th><spring:message code="label.order.lineQuantity" /></th>
 				<th><spring:message code="label.order.lineStatus" /></th>
-			<%-- 	<th><spring:message code="label.order.lineRequiredDate" /></th> --%>
-				<th><spring:message code="label.order.lineReviewedBy" /></th>
-				<th><spring:message code="label.order.lineReviewedDate" /></th>
 				<th><spring:message code="label.order.lineComment" /></th>
 			</tr>
 			<c:forEach var="line" items="${order.orderLines}">
@@ -73,9 +64,6 @@
 					<td>${line.itemPrice }</td>
 					<td>${line.lineQuantity }</td>
 					<td>${line.status }</td>
-		<%-- 			<td>${line.requiredDate }</td> --%>
-					<td>${line.reviewedBy }</td>
-					<td>${line.reviewedDate }</td>
 					<td>${line.comment }</td>
 				</tr>
 			</c:forEach>
