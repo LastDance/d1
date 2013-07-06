@@ -28,7 +28,7 @@ public class UserController {
 	private IUserService userService;
 
 	private static final Logger logger = Logger
-			.getLogger(UserControllerTest.class);
+			.getLogger(UserController.class);
 
 	@RequestMapping("/welcome")
 	public String welcome(Map<String, Object> map) {
