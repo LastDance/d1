@@ -16,5 +16,4 @@
 		<mapping class="com.dms.om.model.TaskLine" />
 		<!-- <mapping class="com.dms.om.model.OrderStatus" /> -->
 	</session-factory>
-
 </hibernate-configuration>
