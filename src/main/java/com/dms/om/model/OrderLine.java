@@ -65,7 +65,7 @@ public class OrderLine {
 
 	@SuppressWarnings("unchecked")
 	@OneToMany()
-	@JoinColumn(name="ord_rvw_group")
+	@JoinColumn(name="ordl_rvw_group")
 	private List<ReviewComment> reviews = LazyList.decorate(
 			new ArrayList<ReviewComment>(),
 			FactoryUtils.instantiateFactory(ReviewComment.class));

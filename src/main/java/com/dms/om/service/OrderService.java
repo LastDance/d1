@@ -73,4 +73,16 @@ public class OrderService implements IOrderService {
 		}
 		return order;
 	}
+
+	@Override
+	public OrderLine getOrderLine(Order order, int lineNbr) {
+		for(OrderLine line : order.getOrderLines()){
+			if(line.getLine() == lineNbr){
+				return line;
+			}
+		}
+			return null;
+	}
+	
+	
 }

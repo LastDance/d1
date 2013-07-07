@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.dms.om.model.Order;
+import com.dms.om.model.OrderLine;
 import com.dms.om.service.IOrderService;
 import com.dms.om.validator.OrderValidator;
 
@@ -36,13 +37,6 @@ public class OrderController {
 		map.put("order", order);
 
 		// TODO order status
-		// List<OrderStatus> orderStatusList =
-		// orderService.getOrderStatusList();
-		// for(OrderStatus s : orderStatusList){
-		// System.out.println(s.getId());
-		// System.out.println(s.getOrderStatus());
-		// }
-		// map.put("statusList", orderStatusList);
 		return "om/createOrder";
 	}
 
@@ -65,7 +59,8 @@ public class OrderController {
 			orderService.createOrder(order);
 
 			logger.info("order created");
-			redirectAttributes.addFlashAttribute("message", "订单" + order.getPrefix() +  order.getId() + "保存成功");
+			redirectAttributes.addFlashAttribute("message",
+					"订单" + order.getPrefix() + order.getId() + "保存成功");
 			return "redirect:viewOrder/" + order.getId();
 		}
 	}
@@ -75,6 +70,16 @@ public class OrderController {
 		Order order = orderService.getOrder(orderID);
 		map.put("order", order);
 		return "om/viewOrder";
+	}
+
+	@RequestMapping(method = RequestMethod.GET, value = "/reviewOrder/{orderID}/{lineNbr}")
+	public String reviewOrder(Map<String, Object> map, @PathVariable int orderID, @PathVariable int lineNbr) {
+		Order order = orderService.getOrder(orderID);
+		OrderLine line = orderService.getOrderLine(order, orderID);
+		
+		map.put("order", order);
+		
+		return "om/reviewOrder";
 	}
 
 }

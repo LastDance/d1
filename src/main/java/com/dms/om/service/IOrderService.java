@@ -1,6 +1,7 @@
 package com.dms.om.service;
 
 import com.dms.om.model.Order;
+import com.dms.om.model.OrderLine;
 
 public interface IOrderService {
 
@@ -15,5 +16,7 @@ public interface IOrderService {
 	public Order initializeOrder(String enteredBy);
 
 	public Order SetOrderStatus(String step, Order order);
+	
+	public OrderLine getOrderLine(Order order, int lineNbr);
 	
 }
