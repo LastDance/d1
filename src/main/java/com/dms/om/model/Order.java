@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.collections.FactoryUtils;
 import org.apache.commons.collections.list.LazyList;
@@ -63,14 +64,17 @@ public class Order implements Serializable {
 	private List<OrderLine> orderLines = LazyList.decorate(
 			new ArrayList<OrderLine>(),
 			FactoryUtils.instantiateFactory(OrderLine.class));
-	
+
 	@SuppressWarnings("unchecked")
 	@OneToMany()
-	@JoinColumn(name="ord_rvw_group")
+	@JoinColumn(name = "ord_rvw_group")
 	private List<ReviewComment> reviews = LazyList.decorate(
 			new ArrayList<ReviewComment>(),
 			FactoryUtils.instantiateFactory(ReviewComment.class));
 
+	@Transient
+	private double totalAmount;
+	
 	public List<OrderLine> getOrderLines() {
 		return orderLines;
 	}
@@ -157,5 +161,14 @@ public class Order implements Serializable {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	public double getTotalAmount(){
+		double ttAmt = 0;
+		
+		for (OrderLine line : orderLines){
+			ttAmt += line.getTotalAmount();
+		}
+		return ttAmt;
 	}
 }

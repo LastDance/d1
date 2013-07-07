@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.apache.commons.collections.FactoryUtils;
 import org.apache.commons.collections.list.LazyList;
@@ -70,6 +71,9 @@ public class OrderLine {
 			new ArrayList<ReviewComment>(),
 			FactoryUtils.instantiateFactory(ReviewComment.class));
 
+	@Transient 
+	private double totalAmount;
+	
 	public String getProduct() {
 		return product;
 	}
@@ -164,6 +168,10 @@ public class OrderLine {
 
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+
+	public double getTotalAmount() {
+		return lineQuantity * itemPrice;
 	}
 
 }
