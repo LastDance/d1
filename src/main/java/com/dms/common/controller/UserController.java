@@ -94,6 +94,13 @@ public class UserController {
 		return "user";
 	}
 	
+	@RequestMapping("/viewUsers") 
+	public String viewUsers(Map<String, Object> map) {
+		List<User> users = userService.findAllUsers();
+		map.put("users", users);
+		return "user/viewUsers";
+	}
+	
 
 	// @RequestMapping(value = "/add", method = RequestMethod.POST)
 	// public String addSysUser(@ModelAttribute("sysUser") User sysUser,

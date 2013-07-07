@@ -29,5 +29,10 @@ public class UserService implements IUserService{
 	public void removeUser(Integer id) {
 		userDAO.removeUser(id);
 	}
+	
+	@Transactional
+	public List<User> findAllUsers() {
+		return userDAO.listUsers();
+	}
 
 }

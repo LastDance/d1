@@ -11,5 +11,7 @@ public interface IUserService {
 	public void createUser(User user);
 
 	public void removeUser(Integer id);
+	
+	public List<User> findAllUsers();
 
 }

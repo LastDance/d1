@@ -38,6 +38,7 @@ public class UserDAO extends AbstractHibernateDAO<User> implements IUserDAO {
 	
 	@Override
 	public List<User> listUsers() {
+		super.setClazz(User.class);
 		return super.findAll();
 	}
 
