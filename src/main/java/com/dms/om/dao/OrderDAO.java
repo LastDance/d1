@@ -1,5 +1,7 @@
 package com.dms.om.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.dms.common.dao.AbstractHibernateDAO;
@@ -25,6 +27,11 @@ public class OrderDAO extends AbstractHibernateDAO<Order> implements IOrderDAO{
 	@Override
 	public Order getOrder(int id) {
 		return super.findOne(id);
+	}
+	
+	@Override 
+	public List<Order> getOrders(){
+		return super.findAll();
 	}
 	
 

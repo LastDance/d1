@@ -1,5 +1,7 @@
 package com.dms.om.service;
 
+import java.util.List;
+
 import com.dms.om.model.Order;
 import com.dms.om.model.OrderLine;
 
@@ -11,7 +13,7 @@ public interface IOrderService {
 
 	public Order getOrder(int id);
 	
-	public void removeDeletedOrderLines(Order order);
+	public Order removeDeletedOrderLines(Order order);
 	
 	public Order initializeOrder(String enteredBy);
 
@@ -19,4 +21,5 @@ public interface IOrderService {
 	
 	public OrderLine getOrderLine(Order order, int lineNbr);
 	
+	public List<Order> getOrders();
 }

@@ -1,6 +1,7 @@
 package com.dms.om.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,10 +33,10 @@ public class OrderService implements IOrderService {
 	}
 
 	@Override
-	public void removeDeletedOrderLines(Order order) {
+	public Order removeDeletedOrderLines(Order order) {
 		// Remove the ##deleted_lines
 		int lineNumber = 1;
-
+		
 		for (int i = 0; i < order.getOrderLines().size(); i++) {
 			if (order.getOrderLines().get(i) != null) {
 				if (!order.getOrderLines().get(i).isActive())
@@ -47,6 +48,8 @@ public class OrderService implements IOrderService {
 				}
 			}
 		}
+		
+		return order;
 	}
 
 	@Override
@@ -82,6 +85,11 @@ public class OrderService implements IOrderService {
 			}
 		}
 			return null;
+	}
+
+	@Transactional
+	public List<Order> getOrders() {
+		return orderDAO.getOrders();
 	}
 	
 	

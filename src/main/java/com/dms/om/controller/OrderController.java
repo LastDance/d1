@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dms.om.form.OrderBrowseForm;
 import com.dms.om.form.ReviewOrderForm;
 import com.dms.om.model.Order;
 import com.dms.om.service.IOrderService;
@@ -45,7 +46,7 @@ public class OrderController {
 			BindingResult result, HttpServletRequest request,
 			Map<String, Object> map, RedirectAttributes redirectAttributes) {
 
-		orderService.removeDeletedOrderLines(order);
+		order = orderService.removeDeletedOrderLines(order);
 
 		OrderValidator orderValidator = new OrderValidator();
 		orderValidator.validate(order, result);
@@ -72,15 +73,25 @@ public class OrderController {
 		return "om/viewOrder";
 	}
 
+	@RequestMapping(method = RequestMethod.GET, value = "/viewOrders")
+	public String orderLists(Map<String, Object> map) {
+		OrderBrowseForm obf = new OrderBrowseForm();
+		obf.setOrders(orderService.getOrders());
+		map.put("obf", obf);
+		return "om/viewOrders";
+	}
+
 	@RequestMapping(method = RequestMethod.GET, value = "/reviewOrder/{orderID}/{lineNbr}")
-	public String reviewOrder(Map<String, Object> map, @PathVariable int orderID, @PathVariable int lineNbr) {
+	public String reviewOrder(Map<String, Object> map,
+			@PathVariable int orderID, @PathVariable int lineNbr) {
 		ReviewOrderForm rof = new ReviewOrderForm();
-		
+
 		rof.setOrder(orderService.getOrder(orderID));
-		rof.setLine(orderService.getOrderLine(orderService.getOrder(orderID), orderID));
-		
+		rof.setLine(orderService.getOrderLine(orderService.getOrder(orderID),
+				orderID));
+
 		map.put("rof", rof);
-		
+
 		return "om/reviewOrder";
 	}
 

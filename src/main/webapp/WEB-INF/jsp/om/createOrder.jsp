@@ -56,32 +56,37 @@
 	<form:form method="post" action="createOrder" commandName="order">
 		<table class="table">
 			<tr>
-				<td><form:label path="customer">
-						<spring:message code="label.order.customer" />
+				<td style="text-align: right"><form:label path="customer">
+						<strong><spring:message code="label.order.customer" /></strong>
 					</form:label></td>
-				<td><form:input path="customer" /><form:errors path="customer" cssClass="label label-important "/></td>
-				<td><form:label path="custmerOrderNumber">
-						<spring:message code="label.order.custmerOrderNumber" />
+				<td><form:input path="customer" />
+					<form:errors path="customer" cssClass="label label-important " /></td>
+				<td style="text-align: right"><form:label
+						path="custmerOrderNumber">
+						<strong><spring:message
+								code="label.order.custmerOrderNumber" /></strong>
 					</form:label></td>
 				<td><form:input path="custmerOrderNumber" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="enteredDate">
-						<spring:message code="label.order.enteredDate" />
+				<td style="text-align: right"><form:label path="enteredDate">
+						<strong><spring:message code="label.order.enteredDate" /></strong>
 					</form:label></td>
 				<td><form:input path="enteredDate" class="datepicker" /></td>
-				<td><form:label path="enteredBy">
-						<spring:message code="label.order.enteredBy" />
+				<td style="text-align: right"><form:label path="enteredBy">
+						<strong><spring:message code="label.order.enteredBy" /></strong>
 					</form:label></td>
-				<td><form:input path="enteredBy" /><form:errors path="enteredBy" cssClass="label label-important "/></td>
+				<td><form:input path="enteredBy" />
+					<form:errors path="enteredBy" cssClass="label label-important " /></td>
 			</tr>
 			<tr>
-				<td><form:label path="requiredDate">
-						<spring:message code="label.order.requiredDate" />
+				<td style="text-align: right"><form:label path="requiredDate">
+						<strong><spring:message code="label.order.requiredDate" /></strong>
 					</form:label></td>
-				<td><form:input path="requiredDate" class="datepicker" /><form:errors path="requiredDate" cssClass="label label-important "/></td>
-				<td><form:label path="comment">
-						<spring:message code="label.order.comment" />
+				<td><form:input path="requiredDate" class="datepicker" />
+					<form:errors path="requiredDate" cssClass="label label-important " /></td>
+				<td style="text-align: right"><form:label path="comment">
+						<strong><spring:message code="label.order.comment" /></strong>
 					</form:label></td>
 				<td><form:textarea path="comment" rows="3" /></td>
 			</tr>
@@ -94,8 +99,8 @@
 			<table id='orderLinetable'
 				class="table table-striped table-condensed">
 				<tr id='orderLinetableHeader'>
-					<th width="50px"><input type="button" id="addOrderLine" onclick="addLine()"
-						class="btn btn-info btn-mini"
+					<th width="50px"><input type="button" id="addOrderLine"
+						onclick="addLine()" class="btn btn-info btn-mini"
 						value="<spring:message code="label.order.addLine" />" /></th>
 					<th><spring:message code="label.order.lineItem" /></th>
 					<th><spring:message code="label.order.lineQuantity" /></th>
@@ -109,17 +114,23 @@
 							class="btn btn-danger btn-mini" name="remove_line${vs.index}"
 							value="删除此条" /></td>
 						<td><form:input path="orderLines[${vs.index}].lineItem"
-								name="lineItem${vs.index}" /><form:errors path="orderLines[${vs.index}].lineItem" cssClass="label label-important "/></td>
+								name="lineItem${vs.index}" />
+							<form:errors path="orderLines[${vs.index}].lineItem"
+								cssClass="label label-important " /></td>
 						<td><form:input type="number" step="any"
 								path="orderLines[${vs.index}].lineQuantity"
-								name="lineQuantity${vs.index}" /><form:errors path="orderLines[${vs.index}].lineQuantity" cssClass="label label-important "/></td>
+								name="lineQuantity${vs.index}" />
+							<form:errors path="orderLines[${vs.index}].lineQuantity"
+								cssClass="label label-important " /></td>
 						<td><form:input type="number" step="any"
 								path="orderLines[${vs.index}].itemPrice"
-								name="itemPrice${vs.index}" /><form:errors path="orderLines[${vs.index}].itemPrice" cssClass="label label-important "/></td>
+								name="itemPrice${vs.index}" />
+							<form:errors path="orderLines[${vs.index}].itemPrice"
+								cssClass="label label-important " /></td>
 						<td><form:input path="orderLines[${vs.index}].comment"
 								name="comment${vs.index}" /></td>
-						<td><form:hidden path="orderLines[${vs.index}].active" name="active${vs.index}" />
-						</td>
+						<td><form:hidden path="orderLines[${vs.index}].active"
+								name="active${vs.index}" /></td>
 					</tr>
 				</c:forEach>
 			</table>

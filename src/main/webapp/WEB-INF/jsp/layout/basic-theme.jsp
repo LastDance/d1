@@ -82,7 +82,7 @@ body {
 							<ul class="dropdown-menu">
 								<li><a tabindex="-1"
 									href="<c:url value='/order/createOrder'/>">录入</a></li>
-								<li><a tabindex="-1" href="#">浏览</a></li>
+								<li><a tabindex="-1" href="<c:url value='/order/viewOrders'/>">浏览</a></li>
 								<li><a tabindex="-1" href="#">审核</a></li>
 							</ul></li>
 					</ul>
@@ -104,6 +104,8 @@ body {
 							<%}%>><a href="<c:url value='/user'/>">用户管理</a></li>
 						<li <%if (pageName.equals("createOrder")) {%> class="active" <%}%>><a
 							href="<c:url value='/order/createOrder'/>">订单录入</a></li>
+							<li <%if (pageName.equals("viewOrders")) {%> class="active" <%}%>><a
+							href="<c:url value='/order/viewOrders'/>">订单浏览</a></li>
 						<li <%if (pageName.equals("underwork")) {%> class="active" <%}%>><a
 							href="<c:url value='/underwork'/>">研发中...</a></li>
 					</ul>
