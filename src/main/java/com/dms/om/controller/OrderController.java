@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.dms.om.form.ReviewOrderForm;
 import com.dms.om.model.Order;
-import com.dms.om.model.OrderLine;
 import com.dms.om.service.IOrderService;
 import com.dms.om.validator.OrderValidator;
 
@@ -74,10 +74,12 @@ public class OrderController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/reviewOrder/{orderID}/{lineNbr}")
 	public String reviewOrder(Map<String, Object> map, @PathVariable int orderID, @PathVariable int lineNbr) {
-		Order order = orderService.getOrder(orderID);
-		OrderLine line = orderService.getOrderLine(order, orderID);
+		ReviewOrderForm rof = new ReviewOrderForm();
 		
-		map.put("order", order);
+		rof.setOrder(orderService.getOrder(orderID));
+		rof.setLine(orderService.getOrderLine(orderService.getOrder(orderID), orderID));
+		
+		map.put("rof", rof);
 		
 		return "om/reviewOrder";
 	}
