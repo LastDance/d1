@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dms.common.dao.IUserDAO;
 import com.dms.common.model.User;
-import com.dms.common.util.Encryption;
 
 @Service
 public class UserService implements IUserService{
