@@ -3,9 +3,15 @@ package com.dms.common.dao;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.dms.om.model.PaginationSupport;
 
 public abstract class AbstractHibernateDAO<T extends Serializable> {
 	private Class<T> clazz;
@@ -48,5 +54,35 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 	protected final Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
+	
+	public PaginationSupport<?> findPageByCriteria(
+			final DetachedCriteria detachedCriteria, final int pageSize,
+			final int startIndex) {
+
+		Criteria criteria = detachedCriteria
+				.getExecutableCriteria(getCurrentSession());
+		int totalCount = ((Integer) criteria.setProjection(
+				Projections.rowCount()).uniqueResult()).intValue();
+		criteria.setProjection(null);
+		List<?> items = criteria.setFirstResult(startIndex)
+				.setMaxResults(pageSize).list();
+		PaginationSupport<?> ps = new PaginationSupport(items, totalCount,
+				pageSize, startIndex);
+		return ps;
+
+	}
+	
+	public  PaginationSupport<T> findPageByQuery( final  String hsql,  final int pageSize,final int startIndex){ 
+	     
+	             Query query  =  getCurrentSession().createQuery(hsql);
+	             int totalCount=query.list().size();
+	             query.setFirstResult(startIndex); 
+	             query.setMaxResults(pageSize); 
+	             List<T> items  = query.list();
+	          PaginationSupport<T> ps = new PaginationSupport<T>(items,
+	       totalCount, pageSize, startIndex);
+	          return ps;
+	  }
+
 
 }
