@@ -10,8 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -29,7 +29,7 @@ public class Order implements Serializable {
 
 	@Id
 	@Column(name = "ord_id")
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue()
 	private Integer id;
 
 	@Column(name = "ord_prefix")
@@ -65,7 +65,8 @@ public class Order implements Serializable {
 			FactoryUtils.instantiateFactory(OrderLine.class));
 	
 	@SuppressWarnings("unchecked")
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany()
+	@JoinColumn(name="ord_rvw_group")
 	private List<ReviewComment> reviews = LazyList.decorate(
 			new ArrayList<ReviewComment>(),
 			FactoryUtils.instantiateFactory(ReviewComment.class));

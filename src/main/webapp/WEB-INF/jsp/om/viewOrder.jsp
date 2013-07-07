@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="currentPage" content="createOrder" />
+<meta name="currentPage" content="viewOrder" />
 <meta name="currentCategory" content="OM" />
 
 <title>订单浏览 | DMS</title>

@@ -72,8 +72,6 @@ body {
 							<ul class="dropdown-menu">
 								<li><a tabindex="-1" href="#">管理</a></li>
 								<li><a tabindex="-1" href="#">浏览</a></li>
-								<li><a tabindex="-1" href="#">增加</a></li>
-								<li><a tabindex="-1" href="#">删除</a></li>
 							</ul></li>
 						<li
 							class="dropdown <%if (pageCategory.equals("OM")) {%>active<%}%>"><a
@@ -86,7 +84,6 @@ body {
 									href="<c:url value='/order/createOrder'/>">录入</a></li>
 								<li><a tabindex="-1" href="#">浏览</a></li>
 								<li><a tabindex="-1" href="#">增加</a></li>
-								<li><a tabindex="-1" href="#">删除</a></li>
 							</ul></li>
 					</ul>
 

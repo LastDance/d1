@@ -18,11 +18,12 @@ import javax.persistence.Table;
 
 import org.apache.commons.collections.FactoryUtils;
 import org.apache.commons.collections.list.LazyList;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.dms.common.model.ReviewComment;
 
 @Entity
-@Table(name = "order_detail")
+@Table(name = "order_line")
 public class OrderLine {
 
 	@Id
@@ -48,6 +49,7 @@ public class OrderLine {
 	@Column(name = "ordl_status")
 	private String status;
 
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "ordl_req_date")
 	private Date requiredDate;
 
@@ -62,7 +64,8 @@ public class OrderLine {
 	private Order order;
 
 	@SuppressWarnings("unchecked")
-	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToMany()
+	@JoinColumn(name="ord_rvw_group")
 	private List<ReviewComment> reviews = LazyList.decorate(
 			new ArrayList<ReviewComment>(),
 			FactoryUtils.instantiateFactory(ReviewComment.class));
