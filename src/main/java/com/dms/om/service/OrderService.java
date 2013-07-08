@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.dms.om.dao.IOrderDAO;
 import com.dms.om.model.Order;
 import com.dms.om.model.OrderLine;
+import com.dms.om.model.PaginationSupport;
 
 @Service
 public class OrderService implements IOrderService {
@@ -91,6 +92,14 @@ public class OrderService implements IOrderService {
 	public List<Order> getOrders() {
 		return orderDAO.getOrders();
 	}
+
+	@Override
+	@Transactional
+	public PaginationSupport<Order> getPageOrders(int pageSize, int startIndex) {
+		String hql = "from Order";
+		return orderDAO.findPageByQuery(hql, pageSize, startIndex);
+	}
+	
 	
 	
 }
