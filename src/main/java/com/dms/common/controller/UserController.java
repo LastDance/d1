@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dms.common.model.User;
 import com.dms.common.service.IUserService;
+import com.dms.common.service.UserService;
 import com.dms.common.util.Encryption;
 import com.dms.common.validator.LoginValidator;
+
 
 @Controller
 public class UserController {
@@ -52,12 +54,14 @@ public class UserController {
 		return "login";
 	}
 
-	@RequestMapping(value = "/user/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String createUser(@ModelAttribute("sysUser") User user,
 			BindingResult result, HttpServletRequest request) {
 		user.setPassword(Encryption.encrypt(user.getPassword()));
 		userService.createUser(user);
-		return "redirect:/welcome";
+		request.setAttribute("message",
+				"用户添加成功");
+		return "forward:/managerUsers";
 	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
@@ -99,6 +103,20 @@ public class UserController {
 		List<User> users = userService.findAllUsers();
 		map.put("users", users);
 		return "user/viewUsers";
+	}
+	
+	@RequestMapping("/managerUsers") 
+	public String managerUsers(Map<String, Object> map, HttpServletRequest request) {
+//		String message = (String)request.getAttribute("message");
+//		if (message != null) {
+//			if (!message.equals("")) {
+//				request.setAttribute("message", message);
+//			}
+//		}
+		List<User> users = userService.findAllUsers();
+		map.put("users", users);
+		map.put("user", new User());
+		return "user/managerUsers";
 	}
 	
 

@@ -14,20 +14,17 @@
 <body>
     <script>
         $(function() {
-            //$('#myModal').on('show', function () {
-            //    $("#myModalLabel").text($('a#').text());
-            //});
-    		$("a.btn").click(function() {
-    			//alert("heloo");
-    			$("#myModalLabel").text($(this).text());
+    		
+    		$("a.detailView").click(function() {
     			$(".modal-body").html("	<fieldset> " 
-    					+ "<legend> " + $(this).parent().parent().children('td:nth-child(1)').text() + "</legend>"
+    					+ "<legend> " + $(this).text() + "</legend>"
     					+ "<table class='table table-striped table-condensed'>"			
     					+ "<tr> <td>电话</td> <td>" + $(this).parent().parent().children('td:nth-child(2)').text() + "</td></tr>"   				
     					+ "<tr> <td>电子邮件</td> <td>" + $(this).parent().parent().children('td:nth-child(3)').text() + "</td></tr>"
     					+ "<tr> <td>QQ号码</td> <td>" + $(this).parent().parent().children('td:nth-child(4)').text() + "</td></tr>"	
     					+ "</table> </fieldset>");
     		});
+    		
         });
     </script>
 
@@ -38,15 +35,13 @@
             <th>电话</th>
             <th>电子邮件</th>
             <th>QQ</th>
-            <th>详情</th>
         </tr>
         <c:forEach var="user" items="${users}">
 		    <tr>
-				<td>${user.username }</td>
+				<td><a href="#myModal" data-toggle="modal" class="detailView">${user.username }</a></td>
 				<td>${user.telephone }</td>
 				<td>${user.email }</td>
 				<td>${user.qqNbr }</td>
-                <td><a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">查看</a></td>
 			</tr>
 		</c:forEach>
     </table>
