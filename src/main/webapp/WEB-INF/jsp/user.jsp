@@ -14,7 +14,7 @@
  
 <h2>用户管理</h2>
  
-<form:form method="post" action="create" commandName="user">
+<form:form method="post" action="create" commandName="sysUser">
  
     <table>
     <tr>
