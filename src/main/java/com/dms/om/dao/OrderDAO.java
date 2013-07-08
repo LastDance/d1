@@ -2,10 +2,7 @@ package com.dms.om.dao;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.Query;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Projections;
 import org.springframework.stereotype.Repository;
 
 import com.dms.common.dao.AbstractHibernateDAO;
@@ -39,4 +36,21 @@ public class OrderDAO extends AbstractHibernateDAO<Order> implements IOrderDAO {
 		return super.findAll();
 	}
 
+	@Override
+	public PaginationSupport<Order> findPageByCriteria(
+			DetachedCriteria detachedCriteria, int pageSize, int startIndex) {
+		if (detachedCriteria == null) {
+			detachedCriteria = DetachedCriteria.forClass(Order.class);			
+		}
+		
+		return (PaginationSupport<Order>) super.findPageByCriteria(detachedCriteria, pageSize, startIndex);
+	}
+
+	@Override
+	public PaginationSupport<Order> findPageByQuery(String hsql, int pageSize,
+			int startIndex) {
+		// TODO Auto-generated method stub
+		return super.findPageByQuery(hsql, pageSize, startIndex);
+	}
+	
 }

@@ -78,7 +78,7 @@ body {
 			</c:set>
 			<form:errors path="username" cssClass="label label-important " />
 			<form:input path="username" class="input-block-level"
-				placeholder="${label_username}" />
+				placeholder="${label_username}" autofocus="autofocus" />
 
 			<c:set var="label_password">
 				<spring:message code='label.password' />

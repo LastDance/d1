@@ -20,13 +20,13 @@
     		$("a.btn").click(function() {
     			//alert("heloo");
     			$("#myModalLabel").text($(this).text());
-    			/*$(".modal-body").html("	<fieldset> " 
-    					+ "<legend> " + $(this).parent().parent().children(td:nth-child(1)).text() + "</legend>"
+    			$(".modal-body").html("	<fieldset> " 
+    					+ "<legend> " + $(this).parent().parent().children('td:nth-child(1)').text() + "</legend>"
     					+ "<table class='table table-striped table-condensed'>"			
-    					+ "<tr> <td>电话</td> <td>" + $(this).parent().parent().children(td:nth-child(2)).text() + "</td></tr>"   				
-    					+ "<tr> <td>电子邮件</td> <td>" + $(this).parent().parent().children(td:nth-child(3)).text() + "</td></tr>"
-    					+ "<tr> <td>QQ号码</td> <td>" + $(this).parent().parent().children(td:nth-child(4)).text() + "</td></tr>"	
-    					+ "</table> </fieldset>");*/
+    					+ "<tr> <td>电话</td> <td>" + $(this).parent().parent().children('td:nth-child(2)').text() + "</td></tr>"   				
+    					+ "<tr> <td>电子邮件</td> <td>" + $(this).parent().parent().children('td:nth-child(3)').text() + "</td></tr>"
+    					+ "<tr> <td>QQ号码</td> <td>" + $(this).parent().parent().children('td:nth-child(4)').text() + "</td></tr>"	
+    					+ "</table> </fieldset>");
     		});
         });
     </script>
@@ -61,7 +61,6 @@
       </div>
       <div class="modal-footer">
         <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
-        <button class="btn btn-primary">Save changes</button>
       </div>
     </div>  
 </body>

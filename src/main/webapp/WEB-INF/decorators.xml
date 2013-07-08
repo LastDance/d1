@@ -7,4 +7,5 @@
 	<decorator name="basic-theme" page="basic-theme.jsp">
 		<pattern>/*</pattern>
 	</decorator>
+	<decorator name="printable" page="printable.jsp"/>
 </decorators>

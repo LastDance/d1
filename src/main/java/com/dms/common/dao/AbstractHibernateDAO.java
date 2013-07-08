@@ -55,14 +55,16 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 		return sessionFactory.getCurrentSession();
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public PaginationSupport<?> findPageByCriteria(
 			final DetachedCriteria detachedCriteria, final int pageSize,
 			final int startIndex) {
 
 		Criteria criteria = detachedCriteria
 				.getExecutableCriteria(getCurrentSession());
-		int totalCount = ((Integer) criteria.setProjection(
-				Projections.rowCount()).uniqueResult()).intValue();
+		Long lTotalCount = (Long)(criteria.setProjection(
+				Projections.rowCount()).uniqueResult());
+		int totalCount = lTotalCount.intValue();
 		criteria.setProjection(null);
 		List<?> items = criteria.setFirstResult(startIndex)
 				.setMaxResults(pageSize).list();

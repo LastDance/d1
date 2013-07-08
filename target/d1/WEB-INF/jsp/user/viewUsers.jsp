@@ -13,19 +13,20 @@
 </head>
 <body>
     <script>
-        $(document).ready(function() {
+        $(function() {
             //$('#myModal').on('show', function () {
             //    $("#myModalLabel").text($('a#').text());
             //});
     		$("a.btn").click(function() {
-    			//$("#myModalLabel").text($(this).text());
-    			$(".modal-body").html("	<fieldset> " 
+    			//alert("heloo");
+    			$("#myModalLabel").text($(this).text());
+    			/*$(".modal-body").html("	<fieldset> " 
     					+ "<legend> " + $(this).parent().parent().children(td:nth-child(1)).text() + "</legend>"
     					+ "<table class='table table-striped table-condensed'>"			
     					+ "<tr> <td>电话</td> <td>" + $(this).parent().parent().children(td:nth-child(2)).text() + "</td></tr>"   				
     					+ "<tr> <td>电子邮件</td> <td>" + $(this).parent().parent().children(td:nth-child(3)).text() + "</td></tr>"
     					+ "<tr> <td>QQ号码</td> <td>" + $(this).parent().parent().children(td:nth-child(4)).text() + "</td></tr>"	
-    					+ "</table> </fieldset>")
+    					+ "</table> </fieldset>");*/
     		});
         });
     </script>

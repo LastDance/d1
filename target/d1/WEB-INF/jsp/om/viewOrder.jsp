@@ -14,7 +14,7 @@
 <body>
 	<h2>订单浏览</h2>
 	<c:if test="${not empty message}">
-		<div class="alert alert-info fade in">
+		<div class="alert alert-success fade in">
 			<a class="close" data-dismiss="alert" href="#">&times;</a> <span>
 				${message} </span> <br />
 		</div>
@@ -22,25 +22,25 @@
 
 	<table class="table">
 		<tr>
-			<td><spring:message code="label.order.number" /></td>
+			<td style="text-align:right"><strong><spring:message code="label.order.number" /></strong></td>
 			<td>${order.prefix }${order.id }</td>
-			<td><spring:message code="label.order.status" /></td>
+			<td style="text-align:right"><strong><spring:message code="label.order.status" /></strong></td>
 			<td>${order.status }</td>
 		</tr>
 		<tr>
-			<td><spring:message code="label.order.customer" /></td>
+			<td style="text-align:right"><strong><spring:message code="label.order.customer" /></strong></td>
 			<td>${order.customer }</td>
-			<td><spring:message code="label.order.custmerOrderNumber" /></td>
+			<td style="text-align:right"><strong><spring:message code="label.order.custmerOrderNumber" /></strong></td>
 			<td>${order.custmerOrderNumber }</td>
 		</tr>
 		<tr>
-			<td><spring:message code="label.order.enteredBy" /></td>
+			<td style="text-align:right"><strong><spring:message code="label.order.enteredBy" /></strong></td>
 			<td>${order.enteredBy }</td>
-			<td><spring:message code="label.order.enteredDate" /></td>
+			<td style="text-align:right"><strong><spring:message code="label.order.enteredDate" /></strong></td>
 			<td>${order.enteredDate }</td>
 		</tr>
 		<tr>
-			<td><spring:message code="label.order.comment" /></td>
+			<td><strong style="text-align:right"><spring:message code="label.order.comment" /></strong></td>
 			<td colspan="3">${order.comment }</td>
 		</tr>
 	</table>
