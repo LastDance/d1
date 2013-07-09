@@ -34,5 +34,10 @@ public class UserService implements IUserService{
 	public List<User> findAllUsers() {
 		return userDAO.listUsers();
 	}
+	
+	@Transactional
+	public User getUser(int userID) {
+		return userDAO.getUser(userID);
+	}
 
 }

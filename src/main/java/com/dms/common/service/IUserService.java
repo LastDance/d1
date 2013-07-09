@@ -13,5 +13,7 @@ public interface IUserService {
 	public void removeUser(Integer id);
 	
 	public List<User> findAllUsers();
+	
+	public User getUser(int UserID);
 
 }

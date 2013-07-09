@@ -15,4 +15,6 @@ public interface IUserDAO {
 	
 	public abstract List<User> listUsers();
 	
+	public User getUser(int userID);
+	
 }

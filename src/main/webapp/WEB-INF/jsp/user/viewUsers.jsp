@@ -13,17 +13,7 @@
 </head>
 <body>
     <script>
-        $(function() {
-    		
-    		$("a.detailView").click(function() {
-    			$(".modal-body").html("	<fieldset> " 
-    					+ "<legend> " + $(this).text() + "</legend>"
-    					+ "<table class='table table-striped table-condensed'>"			
-    					+ "<tr> <td>电话</td> <td>" + $(this).parent().parent().children('td:nth-child(2)').text() + "</td></tr>"   				
-    					+ "<tr> <td>电子邮件</td> <td>" + $(this).parent().parent().children('td:nth-child(3)').text() + "</td></tr>"
-    					+ "<tr> <td>QQ号码</td> <td>" + $(this).parent().parent().children('td:nth-child(4)').text() + "</td></tr>"	
-    					+ "</table> </fieldset>");
-    		});
+        $(function() {    		
     		
         });
     </script>
@@ -38,25 +28,13 @@
         </tr>
         <c:forEach var="user" items="${users}">
 		    <tr>
-				<td><a href="#myModal" data-toggle="modal" class="detailView">${user.username }</a></td>
+				<td><a href="<c:url value='/viewUser/${user.id}'/>" class="detailView">${user.username }</a></td>
 				<td>${user.telephone }</td>
 				<td>${user.email }</td>
 				<td>${user.qqNbr }</td>
 			</tr>
 		</c:forEach>
     </table>
-    
-    <!-- Modal -->
-    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h3 id="myModalLabel">用户信息</h3>
-      </div>
-      <div class="modal-body">
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">关闭</button>
-      </div>
-    </div>  
+     
 </body>
 </html>

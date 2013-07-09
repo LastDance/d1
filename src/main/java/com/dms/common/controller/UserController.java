@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,6 +21,7 @@ import com.dms.common.model.User;
 import com.dms.common.service.IUserService;
 import com.dms.common.util.Encryption;
 import com.dms.common.validator.LoginValidator;
+import com.dms.om.model.Order;
 
 
 @Controller
@@ -52,16 +54,6 @@ public class UserController {
 		map.put("user", new User());
 		return "login";
 	}
-
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public String createUser(@ModelAttribute("sysUser") User user,
-			BindingResult result, HttpServletRequest request) {
-		user.setPassword(Encryption.encrypt(user.getPassword()));
-		userService.createUser(user);
-		request.setAttribute("message",
-				"用户添加成功");
-		return "forward:/managerUsers";
-	}
 	
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String authenticate(@ModelAttribute("user") User user,
@@ -89,20 +81,7 @@ public class UserController {
 					sdf.format(date));
 			return "redirect:/welcome";
 		}
-	}
-
-	@RequestMapping("/user")
-	public String listSysUsers(Map<String, Object> map) {
-		map.put("sysUser", new User());
-		return "user";
-	}
-	
-	@RequestMapping("/viewUsers") 
-	public String viewUsers(Map<String, Object> map) {
-		List<User> users = userService.findAllUsers();
-		map.put("users", users);
-		return "user/viewUsers";
-	}
+	}	
 	
 	@RequestMapping("/managerUsers") 
 	public String managerUsers(Map<String, Object> map, HttpServletRequest request) {
@@ -118,6 +97,43 @@ public class UserController {
 		return "user/managerUsers";
 	}
 	
+	//----------------------------华丽的分割线---------------------------------
+	@RequestMapping("/createUser")
+	public String listSysUsers(Map<String, Object> map) {
+		map.put("user", new User());
+		return "user/createUser";
+	}
+		
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	public String createUser(@ModelAttribute("user") User user,
+			 HttpServletRequest request) {
+		user.setPassword(Encryption.encrypt(user.getPassword()));
+		userService.createUser(user);
+		request.setAttribute("message",
+				"用户添加成功");
+		return "forward:/createUser";
+	}
+	
+	@RequestMapping("/viewUsers") 
+	public String viewUsers(Map<String, Object> map) {
+		List<User> users = userService.findAllUsers();
+		map.put("users", users);
+		return "user/viewUsers";
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/viewUser/{userID}")
+	public String viewUser(Map<String, Object> map, @PathVariable int userID) {
+		User user = userService.getUser(userID);
+		map.put("user", user);
+		return "user/viewUser";
+	}
+	
+	@RequestMapping(method=RequestMethod.GET, value="/updateUser/{userID}")
+	public String updateUser(Map<String, Object> map, @PathVariable int userID) {
+		User user = userService.getUser(userID);
+		map.put("user", user);
+		return "user/updateUser";
+	}
 
 	// @RequestMapping(value = "/add", method = RequestMethod.POST)
 	// public String addSysUser(@ModelAttribute("sysUser") User sysUser,

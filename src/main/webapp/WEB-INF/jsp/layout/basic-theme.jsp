@@ -70,7 +70,7 @@ body {
 								用户管理<b class="caret"></b>
 						</a>
 							<ul class="dropdown-menu">
-								<li><a tabindex="-1" href="<c:url value='/managerUsers'/>">管理</a></li>
+								<li><a tabindex="-1" href="<c:url value='/createUser'/>">新增</a></li>
 								<li><a tabindex="-1" href="<c:url value='/viewUsers'/>">浏览</a></li>
 							</ul></li>
 						<li

@@ -9,6 +9,10 @@ import com.dms.common.model.User;
 
 @Repository
 public class UserDAO extends AbstractHibernateDAO<User> implements IUserDAO {
+	
+	public UserDAO() {
+		super.setClazz(User.class);
+	}	
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -38,8 +42,13 @@ public class UserDAO extends AbstractHibernateDAO<User> implements IUserDAO {
 	
 	@Override
 	public List<User> listUsers() {
-		super.setClazz(User.class);
+//		super.setClazz(User.class);
 		return super.findAll();
+	}
+
+	@Override
+	public User getUser(int userID) {
+		return super.findOne(userID);
 	}
 
 }

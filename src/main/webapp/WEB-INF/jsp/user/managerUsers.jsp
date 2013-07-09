@@ -30,10 +30,16 @@
     		});
     		
     		$(".addUser").click(function() {
-    			$(".operateView").show();
+    			$(".addView").show();
             	$(".tableView").hide();
     		//	$(".operateView").slideUp();
     		//	$(".tableView").slideDown();  			
+    		});
+    		
+    		$("a.update").click(function() {
+    			$(".updateView").show();
+    			$(".tableView").hide();
+    			var name = $(this).parent().parent().children('td:nth-child(1)').text();
     		});
     		
     		$(".cancle").click(function() {
@@ -91,7 +97,8 @@
       </div>
     </div>  
     
-    <div class="operateView">
+    <!-- add User form-->
+    <div class="operateView addView">
         <form:form method="post" action="create" commandName="user">
             <table>
                 <tr>
@@ -121,6 +128,39 @@
             </table>  
         </form:form>
    </div>
-    
+   
+   <!-- update User form -->
+    <div class="operateView updateView">
+    <form:form method="post" action="update" commandName="user">
+        <table>
+            <tr>
+                <td><form:label path="username"><spring:message code="label.username"/></form:label></td>
+                <td><form:input path="username" /></td> 
+            </tr>
+            <tr>
+                <td><form:label path="password"><spring:message code="label.password"/></form:label></td>
+                <td><form:input path="password" /></td>
+            </tr>
+            <tr>
+                <td><form:label path="email"><spring:message code="label.email"/></form:label></td>
+                <td><form:input path="email" /></td>
+            </tr>
+            <tr>
+                <td><form:label path="telephone"><spring:message code="label.telephone"/></form:label></td>
+                <td><form:input path="telephone" /></td>
+            </tr>
+                <tr>
+                <td><form:label path="qqNbr"><spring:message code="label.qqNbr"/></form:label></td>
+                <td><form:input path="qqNbr" /></td>
+            </tr>
+            <tr>
+                <td><input class="btn btn-primary " type="submit" value="修改"/></td>
+                <td><input class="btn btn-primary cancle" type="button" value="取消"/></td>
+            </tr>
+        </table>  
+    </form:form>
+   </div>
+   
+   
 </body>
 </html>
