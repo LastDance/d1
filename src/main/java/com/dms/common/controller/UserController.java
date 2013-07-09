@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.dms.common.model.User;
 import com.dms.common.service.IUserService;
-import com.dms.common.service.UserService;
 import com.dms.common.util.Encryption;
 import com.dms.common.validator.LoginValidator;
 

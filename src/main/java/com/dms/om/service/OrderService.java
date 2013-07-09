@@ -35,7 +35,6 @@ public class OrderService implements IOrderService {
 
 	@Override
 	public Order removeDeletedOrderLines(Order order) {
-		// Remove the ##deleted_lines
 		int lineNumber = 1;
 		
 		for (int i = 0; i < order.getOrderLines().size(); i++) {
@@ -49,7 +48,6 @@ public class OrderService implements IOrderService {
 				}
 			}
 		}
-		
 		return order;
 	}
 

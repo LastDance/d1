@@ -54,7 +54,7 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 	protected final Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public PaginationSupport<?> findPageByCriteria(
 			final DetachedCriteria detachedCriteria, final int pageSize,
@@ -62,8 +62,8 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 
 		Criteria criteria = detachedCriteria
 				.getExecutableCriteria(getCurrentSession());
-		Long lTotalCount = (Long)(criteria.setProjection(
-				Projections.rowCount()).uniqueResult());
+		Long lTotalCount = (Long) (criteria.setProjection(Projections
+				.rowCount()).uniqueResult());
 		int totalCount = lTotalCount.intValue();
 		criteria.setProjection(null);
 		List<?> items = criteria.setFirstResult(startIndex)
@@ -73,18 +73,19 @@ public abstract class AbstractHibernateDAO<T extends Serializable> {
 		return ps;
 
 	}
-	
-	public  PaginationSupport<T> findPageByQuery( final  String hsql,  final int pageSize,final int startIndex){ 
-	     
-	             Query query  =  getCurrentSession().createQuery(hsql);
-	             int totalCount=query.list().size();
-	             query.setFirstResult(startIndex); 
-	             query.setMaxResults(pageSize); 
-	             List<T> items  = query.list();
-	          PaginationSupport<T> ps = new PaginationSupport<T>(items,
-	       totalCount, pageSize, startIndex);
-	          return ps;
-	  }
 
+	@SuppressWarnings("unchecked")
+	public PaginationSupport<T> findPageByQuery(final String hsql,
+			final int pageSize, final int startIndex) {
+
+		Query query = getCurrentSession().createQuery(hsql);
+		int totalCount = query.list().size();
+		query.setFirstResult(startIndex);
+		query.setMaxResults(pageSize);
+		List<T> items = query.list();
+		PaginationSupport<T> ps = new PaginationSupport<T>(items, totalCount,
+				pageSize, startIndex);
+		return ps;
+	}
 
 }

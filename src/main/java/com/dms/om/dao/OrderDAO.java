@@ -36,20 +36,18 @@ public class OrderDAO extends AbstractHibernateDAO<Order> implements IOrderDAO {
 		return super.findAll();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public PaginationSupport<Order> findPageByCriteria(
 			DetachedCriteria detachedCriteria, int pageSize, int startIndex) {
-		if (detachedCriteria == null) {
+		if (detachedCriteria == null) 
 			detachedCriteria = DetachedCriteria.forClass(Order.class);			
-		}
-		
 		return (PaginationSupport<Order>) super.findPageByCriteria(detachedCriteria, pageSize, startIndex);
 	}
 
 	@Override
 	public PaginationSupport<Order> findPageByQuery(String hsql, int pageSize,
 			int startIndex) {
-		// TODO Auto-generated method stub
 		return super.findPageByQuery(hsql, pageSize, startIndex);
 	}
 	

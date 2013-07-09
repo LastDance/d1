@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.dms.om.form.OrderBrowseForm;
 import com.dms.om.form.ReviewOrderForm;
 import com.dms.om.model.Order;
 import com.dms.om.model.PaginationSupport;
@@ -74,12 +73,12 @@ public class OrderController {
 		return "om/viewOrder";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/viewOrders/{startIndex}")
-	public String orderLists(Map<String, Object> map, @PathVariable int startIndex) {
+	@RequestMapping(method = RequestMethod.GET, value = "/viewOrders/{pageNum}")
+	public String orderLists(Map<String, Object> map, @PathVariable int pageNum) {
 //		OrderBrowseForm obf = new OrderBrowseForm();
 //		obf.setOrders(orderService.getOrders());
 //		map.put("obf", obf);
-		PaginationSupport<Order> orderPage = orderService.getPageOrders(2, startIndex);
+		PaginationSupport<Order> orderPage = orderService.getPageOrders(2, (pageNum - 1) * 2);
 		map.put("orderPage", orderPage);
 		return "om/viewOrders";
 	}
