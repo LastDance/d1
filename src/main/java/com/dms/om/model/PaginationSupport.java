@@ -2,7 +2,8 @@ package com.dms.om.model;
 
 import java.util.List;
 
-public class PaginationSupport<E> implements IPaginationSupport<E> {
+//public class PaginationSupport<E> implements IPaginationSupport<E> {
+public class PaginationSupport<E> {
 	public final static int PAGESIZE = 30;
 
 	private int pageSize = PAGESIZE;

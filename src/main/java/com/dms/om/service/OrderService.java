@@ -39,11 +39,12 @@ public class OrderService implements IOrderService {
 		
 		for (int i = 0; i < order.getOrderLines().size(); i++) {
 			if (order.getOrderLines().get(i) != null) {
-				if (!order.getOrderLines().get(i).isActive())
+				if (order.getOrderLines().get(i).isDeletedOnPage())
 					order.getOrderLines().remove(i);
 				else {
 					order.getOrderLines().get(i).setOrder(order);
 					order.getOrderLines().get(i).setLine(lineNumber);
+					order.getOrderLines().get(i).setActive(true);
 					lineNumber++;
 				}
 			}
@@ -97,7 +98,5 @@ public class OrderService implements IOrderService {
 		String hql = "from Order";
 		return orderDAO.findPageByQuery(hql, pageSize, startIndex);
 	}
-	
-	
 	
 }

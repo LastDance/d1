@@ -74,6 +74,10 @@ public class OrderLine {
 	@Transient 
 	private double totalAmount;
 	
+	//flag used to simplify the remove logic on jsp
+	@Transient 
+	private boolean deletedOnPage;
+	
 	public String getProduct() {
 		return product;
 	}
@@ -174,4 +178,11 @@ public class OrderLine {
 		return lineQuantity * itemPrice;
 	}
 
+	public boolean isDeletedOnPage() {
+		return deletedOnPage;
+	}
+
+	public void setDeletedOnPage(boolean deletedOnPage) {
+		this.deletedOnPage = deletedOnPage;
+	}
 }

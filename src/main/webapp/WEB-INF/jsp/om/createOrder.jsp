@@ -39,7 +39,7 @@
 					+ '<td><input type="number" step="any" id="lineQuantity'+ itemCnt + '" name="orderLines['+ itemCnt + '].lineQuantity"' + '/></td>'
 					+ '<td><input type="number" step="any" id="itemPrice'+ itemCnt +'" name="orderLines['+ itemCnt + '].itemPrice"' + '/></td>'
 					+ '<td><input type="text" id="comment'+ itemCnt +'" name="orderLines['+ itemCnt + '].comment"' + '/></td>'
-					+ '<td><input type="hidden" id="active'+ itemCnt + '" name="orderLines['+ itemCnt +'].active" value="true" /></td>'
+					+ '<td><input type="hidden" id="deletedOnPage'+ itemCnt + '" name="orderLines['+ itemCnt +'].deletedOnPage" value="false" /></td>'
 					+ '</tr>';
 			if (itemCnt == 0)
 				$('#orderLinetableHeader').after(newItem);
@@ -48,7 +48,7 @@
 		}
 		function removeLine(rowID) {
 			$('#order_line_' + rowID).hide();
-			$('#active' + rowID).val("false");
+			$('#deletedOnPage' + rowID).val("true");
 		}
 	</script>
 	<h2>订单录入</h2>
@@ -59,8 +59,8 @@
 				<td style="text-align: right"><form:label path="customer">
 						<strong><spring:message code="label.order.customer" /></strong>
 					</form:label></td>
-				<td><form:input path="customer" />
-					<form:errors path="customer" cssClass="label label-important " /></td>
+				<td><form:input path="customer" /> <form:errors
+						path="customer" cssClass="label label-important " /></td>
 				<td style="text-align: right"><form:label
 						path="custmerOrderNumber">
 						<strong><spring:message
@@ -76,15 +76,15 @@
 				<td style="text-align: right"><form:label path="enteredBy">
 						<strong><spring:message code="label.order.enteredBy" /></strong>
 					</form:label></td>
-				<td><form:input path="enteredBy" />
-					<form:errors path="enteredBy" cssClass="label label-important " /></td>
+				<td><form:input path="enteredBy" /> <form:errors
+						path="enteredBy" cssClass="label label-important " /></td>
 			</tr>
 			<tr>
 				<td style="text-align: right"><form:label path="requiredDate">
 						<strong><spring:message code="label.order.requiredDate" /></strong>
 					</form:label></td>
-				<td><form:input path="requiredDate" class="datepicker" />
-					<form:errors path="requiredDate" cssClass="label label-important " /></td>
+				<td><form:input path="requiredDate" class="datepicker" /> <form:errors
+						path="requiredDate" cssClass="label label-important " /></td>
 				<td style="text-align: right"><form:label path="comment">
 						<strong><spring:message code="label.order.comment" /></strong>
 					</form:label></td>
@@ -114,23 +114,23 @@
 							class="btn btn-danger btn-mini" name="remove_line${vs.index}"
 							value="删除此条" /></td>
 						<td><form:input path="orderLines[${vs.index}].lineItem"
-								name="lineItem${vs.index}" />
-							<form:errors path="orderLines[${vs.index}].lineItem"
+								name="lineItem${vs.index}" /> <form:errors
+								path="orderLines[${vs.index}].lineItem"
 								cssClass="label label-important " /></td>
 						<td><form:input type="number" step="any"
 								path="orderLines[${vs.index}].lineQuantity"
-								name="lineQuantity${vs.index}" />
-							<form:errors path="orderLines[${vs.index}].lineQuantity"
+								name="lineQuantity${vs.index}" /> <form:errors
+								path="orderLines[${vs.index}].lineQuantity"
 								cssClass="label label-important " /></td>
 						<td><form:input type="number" step="any"
 								path="orderLines[${vs.index}].itemPrice"
-								name="itemPrice${vs.index}" />
-							<form:errors path="orderLines[${vs.index}].itemPrice"
+								name="itemPrice${vs.index}" /> <form:errors
+								path="orderLines[${vs.index}].itemPrice"
 								cssClass="label label-important " /></td>
 						<td><form:input path="orderLines[${vs.index}].comment"
 								name="comment${vs.index}" /></td>
-						<td><form:hidden path="orderLines[${vs.index}].active"
-								name="active${vs.index}" /></td>
+						<td><form:hidden path="orderLines[${vs.index}].deletedOnPage"
+								name="active${vs.deletedOnPage}" /></td>
 					</tr>
 				</c:forEach>
 			</table>

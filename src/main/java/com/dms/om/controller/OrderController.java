@@ -23,13 +23,14 @@ import com.dms.om.validator.OrderValidator;
 @Controller
 @RequestMapping("/order")
 public class OrderController {
+	
 	@Autowired
 	private IOrderService orderService;
 
 	private static final Logger logger = Logger
 			.getLogger(OrderController.class);
 
-	@RequestMapping("/createOrder")
+	@RequestMapping("/create")
 	public String createOrder(Map<String, Object> map,
 			HttpServletRequest request) {
 		String userLoged = (String) request.getSession().getAttribute("user");
@@ -41,7 +42,7 @@ public class OrderController {
 		return "om/createOrder";
 	}
 
-	@RequestMapping(value = "/createOrder", method = RequestMethod.POST)
+	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public String addOrder(@ModelAttribute("order") Order order,
 			BindingResult result, HttpServletRequest request,
 			Map<String, Object> map, RedirectAttributes redirectAttributes) {
@@ -66,24 +67,24 @@ public class OrderController {
 		}
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/viewOrder/{orderID}")
+	@RequestMapping(method = RequestMethod.GET, value = "/view/{orderID}")
 	public String viewOrder(Map<String, Object> map, @PathVariable int orderID) {
 		Order order = orderService.getOrder(orderID);
 		map.put("order", order);
 		return "om/viewOrder";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/viewOrders/{pageNum}")
+	@RequestMapping(method = RequestMethod.GET, value = "/list/{pageNum}")
 	public String orderLists(Map<String, Object> map, @PathVariable int pageNum) {
 //		OrderBrowseForm obf = new OrderBrowseForm();
 //		obf.setOrders(orderService.getOrders());
 //		map.put("obf", obf);
-		PaginationSupport<Order> orderPage = orderService.getPageOrders(2, (pageNum - 1) * 2);
+		PaginationSupport<Order> orderPage = orderService.getPageOrders(5, (pageNum - 1) * 5);
 		map.put("orderPage", orderPage);
 		return "om/viewOrders";
 	}
 
-	@RequestMapping(method = RequestMethod.GET, value = "/reviewOrder/{orderID}/{lineNbr}")
+	@RequestMapping(method = RequestMethod.GET, value = "/review/{orderID}/{lineNbr}")
 	public String reviewOrder(Map<String, Object> map,
 			@PathVariable int orderID, @PathVariable int lineNbr) {
 		ReviewOrderForm rof = new ReviewOrderForm();
