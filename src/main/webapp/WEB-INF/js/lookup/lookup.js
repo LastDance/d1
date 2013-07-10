@@ -15,7 +15,7 @@
 	  $('input[type="text"]').each(function(){
 		  var lookupVal = $(this).attr('lookup');
 		  if(lookupVal != '' && (typeof lookupVal != 'undefined')) {
-			  var imgstr = '<a href="#" browseUrl="' + lookupVal + '"><img src="img/search.png" /></a>';
+			  var imgstr = '<a href="#lookup_frame" browseUrl="' + lookupVal + '" data-toggle="modal"><img src="img/search.png" /></a>';
 			  $(imgstr).insertAfter($(this));
 		  }
 	  });
@@ -30,13 +30,16 @@
    */
   Lookup.setUp = function(){
 	  $('input[type="text"] + a').each(function(){
+//		  $(this).on('click', function(){
+		  var browseUrl = $(this).attr('browseUrl');
+		  var inputID = $(this).prev().attr('id');
+		  var frameID = Lookup.drawBrowseFrame();
 		  $(this).on('click', function(){
-			  var browseUrl = $(this).attr('browseUrl');
-			  var inputID = $(this).prev().attr('id');
-			  var frameID = Lookup.drawBrowseFrame();
-			  Lookup.showBrowse(frameID, browseUrl, inputID);
+			  Lookup.getViewContent(browseUrl, inputID, frameID);
 		  });
-	  });
+//			  Lookup.showBrowse(frameID, browseUrl, inputID);
+		  });
+//	  });
   }
   
   //$('#' + inputId).bind('selectback', eventHandler);
@@ -63,12 +66,22 @@
    * Method to draw a frame for the views to display.
    */
   Lookup.drawBrowseFrame = function(){
-    var frame = '<div id="lookup_frame" title="Lookup Browse">';
-    frame += '<div id="lookup_content_wrapper">';
-    frame += '<div class="browse-loading"></div></div></div>';
-    $(frame).appendTo('body');
-    return 'lookup_frame';
-  };
+	    var frame = '<div id="lookup_frame" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">'
+			    	+ '<div class="modal-header">'
+			    	+ 	'<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>'
+			    	+ 	'<h3 id="myModalLabel">Modal header</h3>'
+			    	+ '</div>'
+			    	+ '<div id="lookup_content_wrapper" class="modal-body">'
+			    	+ 	'<p>One fine body…</p>'
+			    	+ '</div>'
+			    	+ '<div class="modal-footer">'
+			    	+ 	'<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>'
+			    	+ 	'<button class="btn btn-primary">Save changes</button>'
+			    	+ '</div>'
+			    + '</div>';
+	    $(frame).appendTo('body');
+	    return 'lookup_frame';
+	  };
 
   /**
    * Using ajax to load the specified views content.
@@ -77,7 +90,7 @@
     //TODO:ajax request to get the view content
     $.ajax({
       type: "GET",
-      url: "?q=lookup/get/views",
+      url:  "browse/" + browseUrl,
       data: {
         "viewId": browseUrl
       },
@@ -106,7 +119,7 @@
       //Add click event to the link of first column
       $(this).children('a').click(function(){
         Lookup.handleSelect.call(this, inputSelector);
-        $('#' + frameID).dialog("close");
+        $('#' + frameID).modal("hide");
       });
     });
   };

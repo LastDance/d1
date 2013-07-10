@@ -152,4 +152,16 @@ public class UserController {
 	// return "redirect:/user";
 	// }
 
+	@RequestMapping("/user")
+	public String testUser(Map<String, Object> map) {
+		map.put("sysUser", new User());
+		return "user";
+	}
+	
+	@RequestMapping("/browse/browseUsers")
+	public String browseUsers(Map<String, Object> map) {
+		List<User> users = userService.findAllUsers();
+		map.put("users", users);
+		return "user/browseUsers";
+	}
 }

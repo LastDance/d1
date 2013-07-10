@@ -9,9 +9,12 @@
 <meta name="currentCategory" content="user"/>
 
     <title>用户管理 | DMS</title>
+    
 </head>
 <body>
- 
+<script src='<c:url value="/js/lookup/lookup.js" />'></script>
+<script src='<c:url value="/js/browseTest.js" />'></script>
+
 <h2>用户管理</h2>
  
 <form:form method="post" action="create" commandName="sysUser">
@@ -19,7 +22,7 @@
     <table>
     <tr>
         <td><form:label path="username"><spring:message code="label.username"/></form:label></td>
-        <td><form:input path="username" /></td> 
+        <td><form:input path="username" lookup="browseUsers" /></td> 
     </tr>
     <tr>
         <td><form:label path="password"><spring:message code="label.password"/></form:label></td>
