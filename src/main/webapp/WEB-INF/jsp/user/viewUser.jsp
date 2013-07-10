@@ -27,7 +27,7 @@
     </c:if>
     
     <fieldset> 
-        <legend>${user.username} </legend>
+        <legend>${user.username} <input type="button" class="btn btn-danger btn-mini delete" style="float: right" value="删除"></legend>
         <table class='table table-striped table-condensed'>        
             <tr> 
                 <td>电话</td> 
@@ -45,7 +45,7 @@
     </fieldset>
      
     <a class="btn btn-primary" href="<c:url value='/updateUser/${user.id}'/>">修改</a>
-    <a class="btn btn-primary" href="<c:url value='/viewUsers'/>">返回</a>
+    <a class="btn btn-primary" href="<c:url value='/viewUsers/1'/>">返回</a>
    
 </body>
 </html>

@@ -71,7 +71,7 @@ body {
 						</a>
 							<ul class="dropdown-menu">
 								<li><a tabindex="-1" href="<c:url value='/createUser'/>">新增</a></li>
-								<li><a tabindex="-1" href="<c:url value='/viewUsers'/>">浏览</a></li>
+								<li><a tabindex="-1" href="<c:url value='/viewUsers/1'/>">浏览</a></li>
 							</ul></li>
 						<li
 							class="dropdown <%if (pageCategory.equals("OM")) {%>active<%}%>"><a

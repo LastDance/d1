@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dms.common.dao.IUserDAO;
 import com.dms.common.model.User;
+import com.dms.om.model.PaginationSupport;
 
 @Service
 public class UserService implements IUserService{
@@ -38,6 +39,17 @@ public class UserService implements IUserService{
 	@Transactional
 	public User getUser(int userID) {
 		return userDAO.getUser(userID);
+	}
+
+	@Transactional
+	public void updateUser(User user) {
+		userDAO.updateUser(user);
+	}
+
+	@Transactional
+	public PaginationSupport<User> findPageByQuery(int pageSize,
+			int startIndex) {
+		return userDAO.findPageByQuery("from User", pageSize, startIndex);
 	}
 
 }

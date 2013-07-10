@@ -22,6 +22,7 @@ import com.dms.common.service.IUserService;
 import com.dms.common.util.Encryption;
 import com.dms.common.validator.LoginValidator;
 import com.dms.om.model.Order;
+import com.dms.om.model.PaginationSupport;
 
 
 @Controller
@@ -114,14 +115,16 @@ public class UserController {
 		return "forward:/createUser";
 	}
 	
-	@RequestMapping("/viewUsers") 
-	public String viewUsers(Map<String, Object> map) {
-		List<User> users = userService.findAllUsers();
-		map.put("users", users);
+	@RequestMapping("/viewUsers/{pageNum}") 
+	public String viewUsers(Map<String, Object> map, @PathVariable int pageNum) {
+//		List<User> users = userService.findAllUsers();
+//		map.put("users", users);
+		PaginationSupport<User> userPage = userService.findPageByQuery(5, 5 * (pageNum - 1));
+		map.put("userPage", userPage);
 		return "user/viewUsers";
 	}
 	
-	@RequestMapping(method=RequestMethod.GET, value="/viewUser/{userID}")
+	@RequestMapping(value="/viewUser/{userID}")
 	public String viewUser(Map<String, Object> map, @PathVariable int userID) {
 		User user = userService.getUser(userID);
 		map.put("user", user);
@@ -134,6 +137,18 @@ public class UserController {
 		map.put("user", user);
 		return "user/updateUser";
 	}
+	
+	@RequestMapping(method=RequestMethod.POST, value="/updateUser/updateUserAct")
+	public String updateUser(User user,
+			HttpServletRequest request) {
+		userService.updateUser(user);
+		request.setAttribute("message",
+				"用户信息修改成功");
+		int userID = user.getId();
+		return "forward:/viewUser/" + userID;
+	}
+	
+	
 
 	// @RequestMapping(value = "/add", method = RequestMethod.POST)
 	// public String addSysUser(@ModelAttribute("sysUser") User sysUser,
